@@ -3,15 +3,7 @@ import ImageIcon from "@/components/icons/ImageIcon";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
-import { cn } from "@/lib/utils";
-
-const palette = [
-  { hex: "#2d3142" },
-  { hex: "#4f5d75" },
-  { hex: "#bfc0c0" },
-  { hex: "#f2e5e1" },
-  { hex: "#ef8354" },
-];
+import { palette } from "@/data";
 
 const ImagePaletteExtractor = () => {
   return (
@@ -36,7 +28,7 @@ const ImagePaletteExtractor = () => {
               return (
                 <div
                   key={color.hex}
-                  className="h-12 min-w-[2.5rem] flex-grow"
+                  className="h-12 flex-grow"
                   style={{ background: `${color.hex}` }}
                 ></div>
               );
