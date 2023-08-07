@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 const CopyPalettes = () => {
   return (
-    <div className="w-full flex justify-center gap-6">
+    <div className="w-full flex justify-center gap-6 my-4">
       {palette.map((colorFromPalette) => {
         return <Color key={colorFromPalette.hex} hex={colorFromPalette.hex} />;
       })}

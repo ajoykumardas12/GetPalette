@@ -1,5 +1,7 @@
 import CopyPalettes from "@/components/CopyPalettes";
 import ImagePaletteExtractor from "@/components/ImagePaletteExtractor";
+import AddIcon from "@/components/icons/AddIcon";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -10,6 +12,10 @@ export default function Home() {
       </div>
       <ImagePaletteExtractor />
       <CopyPalettes />
+      <Button className="">
+        <AddIcon iconClass="w-5 h-5 mr-2" />
+        Add palette to community
+      </Button>
     </main>
   );
 }
