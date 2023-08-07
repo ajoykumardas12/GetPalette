@@ -34,7 +34,7 @@ const config: Config = {
       colors: {
         darkest: "#160F29",
         dark: "#41375D",
-        brand: "#DDBEA8",
+        brand: "#ad6a3b",
         mid: "#65A6A3",
         light: "#DFEAEA",
       },
