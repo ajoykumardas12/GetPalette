@@ -2,17 +2,38 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
-import { palette } from "@/data";
 import { useImageStore } from "@/store/imageStore";
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import ImageInput from "./ImageInput";
+import { usePaletteStore } from "@/store/paletteStore";
+import ColorThief from "colorthief";
+import { colorThiefDataToPalette } from "@/lib/utils";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
+  const palette = usePaletteStore((state) => state.palette);
+  const setPalette = usePaletteStore((state) => state.setPalette);
 
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  // function to get palette from color thief. Wrapped inside callback to prevent calling setPalette on rerenders
+  const getPaletteFromImage = useCallback(() => {
+    const colorthief = new ColorThief();
+    const paletteData = colorthief.getPalette(imgRef.current, 5);
+    const newPalette = colorThiefDataToPalette(paletteData);
+    setPalette(newPalette);
+  }, [setPalette]);
+
+  // call getPaletteFromImage when image is loaded
   useEffect(() => {
-    console.log(image);
-  }, [image]);
+    if (imgRef.current?.complete) {
+      getPaletteFromImage();
+    } else {
+      imgRef.current?.addEventListener("load", () => {
+        getPaletteFromImage();
+      });
+    }
+  }, [getPaletteFromImage, image, setPalette]);
 
   return (
     <div className="flex w-10/12 border border-stone-200 rounded-lg">
@@ -29,15 +50,16 @@ const ImagePaletteExtractor = () => {
             </div>
           </div>
           <div className="w-full flex rounded overflow-hidden">
-            {palette.map((color) => {
-              return (
-                <div
-                  key={color.hex}
-                  className="h-10 flex-grow"
-                  style={{ background: `${color.hex}` }}
-                ></div>
-              );
-            })}
+            {palette &&
+              palette.map((color) => {
+                return (
+                  <div
+                    key={color.rgb}
+                    className="h-10 flex-grow"
+                    style={{ background: `${color.rgb}` }}
+                  ></div>
+                );
+              })}
           </div>
         </div>
 
@@ -48,6 +70,7 @@ const ImagePaletteExtractor = () => {
       </div>
       <div className="w-7/12 p-6 flex items-center justify-center border-l border-l-stone-200">
         <Image
+          ref={imgRef}
           src={image ? image : "/images/new-world.png"}
           width={400}
           height={300}
