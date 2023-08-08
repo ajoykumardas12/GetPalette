@@ -21,7 +21,13 @@ const ImagePaletteExtractor = () => {
         <div className="mt-auto mb-8">
           <div className="mb-4 flex flex-col gap-3">
             <div className="text-sm">No of colors</div>
-            <Slider min={3} max={10} step={1} className="cursor-pointer" />
+            <div>
+              {/* <div className="flex justify-between mb-2 text-xs">
+                <div>3</div>
+                <div>10</div>
+              </div> */}
+              <Slider min={3} max={10} step={1} className="cursor-pointer" />
+            </div>
           </div>
           <div className="w-full flex rounded overflow-hidden">
             {palette.map((color) => {

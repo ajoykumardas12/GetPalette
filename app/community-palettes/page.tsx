@@ -1,3 +1,3 @@
 export default function Home() {
-  return <main>Community-palettes</main>;
+  return <main className="p-6">Community-palettes</main>;
 }
