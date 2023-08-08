@@ -11,7 +11,7 @@ export interface ImageStoreActions extends ImageStoreState {
 }
 
 export interface Color {
-  rgb: string;
+  rgb: number[];
 }
 
 export interface PaletteStore {

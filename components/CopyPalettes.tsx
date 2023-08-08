@@ -1,19 +1,26 @@
-import { palette } from "@/data";
+"use client";
 import { Separator } from "./ui/separator";
 import CopyIcon from "./icons/CopyIcon";
 import { Button } from "./ui/button";
+import { usePaletteStore } from "@/store/paletteStore";
+import { rgbArrayToHex } from "@/lib/utils";
 
 const CopyPalettes = () => {
+  const palette = usePaletteStore((state) => state.palette);
+
   return (
     <div className="w-full flex justify-center gap-6 my-4">
-      {palette.map((colorFromPalette) => {
-        return <Color key={colorFromPalette.hex} hex={colorFromPalette.hex} />;
-      })}
+      {palette &&
+        palette.map((colorFromPalette, index) => {
+          return <Color key={index} rgb={colorFromPalette.rgb} />;
+        })}
     </div>
   );
 };
 
-const Color = ({ hex }: { hex: string }) => {
+const Color = ({ rgb }: { rgb: number[] }) => {
+  const hex = rgbArrayToHex(rgb);
+
   return (
     <Button
       className="h-32 w-32 flex flex-col items-center cursor-pointer rounded-lg hover:-translate-y-1 focus:-translate-y-1 transition-transform"

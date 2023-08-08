@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef } from "react";
 import ImageInput from "./ImageInput";
 import { usePaletteStore } from "@/store/paletteStore";
 import ColorThief from "colorthief";
-import { colorThiefDataToPalette } from "@/lib/utils";
+import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
@@ -50,16 +50,20 @@ const ImagePaletteExtractor = () => {
             </div>
           </div>
           <div className="w-full flex rounded overflow-hidden">
-            {palette &&
-              palette.map((color) => {
+            {palette ? (
+              palette.map((color, index) => {
+                const hex = rgbArrayToHex(color.rgb);
                 return (
                   <div
-                    key={color.rgb}
+                    key={index}
                     className="h-10 flex-grow"
-                    style={{ background: `${color.rgb}` }}
+                    style={{ background: `${hex}` }}
                   ></div>
                 );
-              })}
+              })
+            ) : (
+              <div>loading...</div>
+            )}
           </div>
         </div>
 
