@@ -16,7 +16,7 @@ const CopyPalettes = () => {
 const Color = ({ hex }: { hex: string }) => {
   return (
     <Button
-      className="h-32 w-32 flex flex-col items-center cursor-pointer rounded-lg hover:-translate-y-1 focus:-translate-y-1 transition"
+      className="h-32 w-32 flex flex-col items-center cursor-pointer rounded-lg hover:-translate-y-1 focus:-translate-y-1 transition-transform"
       style={{ background: `${hex}` }}
     >
       <div className="flex flex-grow items-center">
