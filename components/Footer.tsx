@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const Footer = () => {
   return (
-    <footer className="p-8 text-center bg-light">
+    <footer className="p-8 text-center text-sm bg-light">
       <div>
         Built by{" "}
         <HoverCard>

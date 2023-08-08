@@ -15,7 +15,7 @@ const ImagePaletteExtractor = () => {
             <ImageIcon iconClass="w-5 h-5" /> Upload Image
           </label>
         </Button>
-        <Button variant="secondary" className="mb-4">
+        <Button variant="secondary" className="mb-8">
           Try Stock Image
         </Button>
         <div className="mt-auto mb-8">
@@ -34,7 +34,7 @@ const ImagePaletteExtractor = () => {
               return (
                 <div
                   key={color.hex}
-                  className="h-12 flex-grow"
+                  className="h-10 flex-grow"
                   style={{ background: `${color.hex}` }}
                 ></div>
               );
@@ -43,8 +43,8 @@ const ImagePaletteExtractor = () => {
         </div>
 
         <div className="flex flex-col gap-3">
+          <Button variant="secondary">Test Palette Live</Button>
           <Button>Export Palette</Button>
-          {/* <Button variant="secondary">Test Palette Live</Button> */}
         </div>
       </div>
       <div className="w-7/12 p-6 flex items-center justify-center border-l border-l-stone-200">
