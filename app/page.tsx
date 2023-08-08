@@ -12,7 +12,7 @@ export default function Home() {
       </div>
       <ImagePaletteExtractor />
       <CopyPalettes />
-      <Button className="">
+      <Button className="mb-10">
         <AddIcon iconClass="w-5 h-5 mr-2" />
         Add palette to community
       </Button>
