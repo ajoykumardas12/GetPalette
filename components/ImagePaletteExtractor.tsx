@@ -10,6 +10,7 @@ import ColorThief from "colorthief";
 import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import ExportPaletteDialog from "./ExportPaletteDialog";
+import { Skeleton } from "./ui/skeleton";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
@@ -64,7 +65,7 @@ const ImagePaletteExtractor = () => {
                 );
               })
             ) : (
-              <div>loading...</div>
+              <Skeleton className="w-full h-10" />
             )}
           </div>
         </div>

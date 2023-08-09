@@ -5,16 +5,24 @@ import { Button } from "./ui/button";
 import { usePaletteStore } from "@/store/paletteStore";
 import { rgbArrayToHex } from "@/lib/utils";
 import { useCopy } from "@/hooks/useCopy";
+import { Skeleton } from "./ui/skeleton";
 
 const CopyPalettes = () => {
   const palette = usePaletteStore((state) => state.palette);
 
   return (
     <div className="w-full flex justify-center gap-6 my-4">
-      {palette &&
+      {palette ? (
         palette.map((colorFromPalette, index) => {
           return <Color key={index} rgb={colorFromPalette.rgb} />;
-        })}
+        })
+      ) : (
+        <>
+          <Skeleton className="w-32 h-32 rounded-lg" />
+          <Skeleton className="w-32 h-32 rounded-lg" />
+          <Skeleton className="w-32 h-32 rounded-lg" />
+        </>
+      )}
     </div>
   );
 };

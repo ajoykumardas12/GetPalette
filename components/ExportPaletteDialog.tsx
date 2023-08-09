@@ -39,7 +39,7 @@ const ExportPaletteDialog = () => {
             <DialogHeader>CSS</DialogHeader>
             <div className="p-2 border border-mid/40 rounded">
               <ScrollArea className="h-72">
-                <pre>{paletteCSS}</pre>
+                <pre className="text-sm">{paletteCSS}</pre>
               </ScrollArea>
             </div>
             <DialogFooter>
