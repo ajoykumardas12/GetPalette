@@ -17,7 +17,8 @@ export const useCopy = (): [boolean, (text: string) => void, () => void] => {
   };
 
   const resetCopied = () => {
-    setTimeout(() => setCopied(false), 1000);
+    const resetTimeout = setTimeout(() => setCopied(false), 1000);
+    return () => clearTimeout(resetTimeout)
   };
 
   return [copied, copy, resetCopied];
