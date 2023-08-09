@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
 import { useImageStore } from "@/store/imageStore";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ImageInput from "./ImageInput";
 import { usePaletteStore } from "@/store/paletteStore";
 import ColorThief from "colorthief";
@@ -16,16 +16,17 @@ const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
   const palette = usePaletteStore((state) => state.palette);
   const setPalette = usePaletteStore((state) => state.setPalette);
+  const [noOfCol, setNoOfCol] = useState(5);
 
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   // function to get palette from color thief. Wrapped inside callback to prevent calling setPalette on rerenders
   const getPaletteFromImage = useCallback(() => {
     const colorthief = new ColorThief();
-    const paletteData = colorthief.getPalette(imgRef.current, 5);
+    const paletteData = colorthief.getPalette(imgRef.current, noOfCol);
     const newPalette = colorThiefDataToPalette(paletteData);
     setPalette(newPalette);
-  }, [setPalette]);
+  }, [setPalette, noOfCol]);
 
   // call getPaletteFromImage when image is loaded
   useEffect(() => {
@@ -46,10 +47,18 @@ const ImagePaletteExtractor = () => {
           Try Stock Image
         </Button> */}
         <div className="mt-auto mb-8">
-          <div className="mb-4 flex flex-col gap-3">
+          <div className="mb-6 flex flex-col gap-3">
             <div className="text-sm">No of colors</div>
             <div>
-              <Slider min={3} max={10} step={1} className="cursor-pointer" />
+              <Slider
+                min={3}
+                max={8}
+                step={1}
+                value={[noOfCol]}
+                // see radix ui slider for reference
+                onValueChange={(newValue) => setNoOfCol(newValue[0])}
+                className="cursor-pointer"
+              />
             </div>
           </div>
           <div className="w-full flex rounded overflow-hidden">

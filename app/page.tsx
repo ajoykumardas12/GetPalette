@@ -8,7 +8,7 @@ export default function Home() {
     <main className="flex flex-col items-center justify-between gap-10 p-6">
       <div className="mt-10 text-center ">
         <h1 className="text-4xl font-bold">Palette Extractor</h1>
-        <p className="mt-3">Extract palettes from images</p>
+        <p className="mt-3">Generate palettes from images</p>
       </div>
       <ImagePaletteExtractor />
       <CopyPalettes />
