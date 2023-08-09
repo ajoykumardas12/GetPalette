@@ -39,9 +39,9 @@ const ImagePaletteExtractor = () => {
     <div className="flex w-10/12 border border-stone-200 rounded-lg">
       <div className="w-5/12 flex flex-col px-8 py-6 gap-3">
         <ImageInput />
-        <Button variant="secondary" className="mb-8">
+        {/* <Button variant="secondary" className="mb-8">
           Try Stock Image
-        </Button>
+        </Button> */}
         <div className="mt-auto mb-8">
           <div className="mb-4 flex flex-col gap-3">
             <div className="text-sm">No of colors</div>
