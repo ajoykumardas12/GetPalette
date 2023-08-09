@@ -19,7 +19,7 @@ export const colorThiefDataToPalette = (data: number[][]) => {
   return newPalette;
 };
 
-export const rgbArrayToString = (rgbArray: Color[]) => {
+export const rgbArrayToString = (rgbArray: number[]) => {
   return `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`;
 };
 

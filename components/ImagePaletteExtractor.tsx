@@ -8,6 +8,8 @@ import ImageInput from "./ImageInput";
 import { usePaletteStore } from "@/store/paletteStore";
 import ColorThief from "colorthief";
 import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import ExportPaletteDialog from "./ExportPaletteDialog";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
@@ -68,8 +70,17 @@ const ImagePaletteExtractor = () => {
         </div>
 
         <div className="flex flex-col gap-3">
-          <Button variant="secondary">Test Palette Live</Button>
-          <Button>Export Palette</Button>
+          <Button variant="secondary" disabled>
+            Test Palette Live
+          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="w-full">Export Palette</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <ExportPaletteDialog />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <div className="w-7/12 p-6 flex items-center justify-center border-l border-l-stone-200">
