@@ -12,6 +12,7 @@ import { Skeleton } from "./ui/skeleton";
 import NoOfColors from "./NoOfColors";
 import { stockImages } from "@/store/stockImages";
 import { getStockImagesURL } from "@/lib/getStockImages";
+import { useStockImageIndexStore } from "@/store/stockImageIndexStore";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
@@ -82,6 +83,10 @@ const ImagePaletteExtractor = () => {
 };
 
 const StockImage = () => {
+  const currentIndex = useStockImageIndexStore((state) => state.currentIndex);
+  const increaseStockImageIndex = useStockImageIndexStore(
+    (state) => state.increaseStockImageIndex
+  );
   const setImage = useImageStore((state) => state.setImage);
   const palette = usePaletteStore((state) => state.palette);
 
@@ -90,8 +95,8 @@ const StockImage = () => {
       variant="secondary"
       className="mb-8"
       onClick={() => {
-        getStockImagesURL(5);
-        setImage(stockImages[0].url);
+        setImage(getStockImagesURL(currentIndex));
+        increaseStockImageIndex();
       }}
       disabled={!palette}
     >

@@ -25,3 +25,10 @@ export interface PaletteStoreActions extends PaletteStore {
 export interface StockImage {
   url: string;
 }
+
+export interface StockImageIndexStore {
+  currentIndex: number;
+}
+export interface StockImageIndexStoreActions extends StockImageIndexStore {
+  increaseStockImageIndex: () => void;
+}
