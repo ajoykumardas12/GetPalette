@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Slider } from "@/components/ui/slider";
 import { useImageStore } from "@/store/imageStore";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ImageInput from "./ImageInput";
@@ -11,14 +10,7 @@ import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import ExportPaletteDialog from "./ExportPaletteDialog";
 import { Skeleton } from "./ui/skeleton";
-import { Label } from "./ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
+import NoOfColors from "./NoOfColors";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
@@ -55,27 +47,7 @@ const ImagePaletteExtractor = () => {
           Try Stock Image
         </Button> */}
         <div className="mt-auto mb-8">
-          <div className="mb-6 flex flex-col gap-3">
-            <Label htmlFor="noOfColors">No of colors</Label>
-            <Select
-              defaultValue={noOfCol.toString()}
-              value={noOfCol.toString()}
-              onValueChange={(value) => setNoOfCol(Number(value))}
-            >
-              <SelectTrigger id="noOfColors">
-                <SelectValue placeholder="Select" />
-              </SelectTrigger>
-              <SelectContent className="">
-                {[3, 4, 5, 6, 7, 8].map((num) => {
-                  return (
-                    <SelectItem key={num} value={num.toString()}>
-                      {num}
-                    </SelectItem>
-                  );
-                })}
-              </SelectContent>
-            </Select>
-          </div>
+          <NoOfColors noOfCol={noOfCol} setNoOfCol={setNoOfCol} />
           <div className="w-full flex rounded overflow-hidden">
             {palette ? (
               palette.map((color, index) => {
