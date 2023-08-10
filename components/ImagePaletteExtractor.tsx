@@ -11,6 +11,14 @@ import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import ExportPaletteDialog from "./ExportPaletteDialog";
 import { Skeleton } from "./ui/skeleton";
+import { Label } from "./ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
@@ -48,18 +56,25 @@ const ImagePaletteExtractor = () => {
         </Button> */}
         <div className="mt-auto mb-8">
           <div className="mb-6 flex flex-col gap-3">
-            <div className="text-sm">No of colors</div>
-            <div>
-              <Slider
-                min={3}
-                max={8}
-                step={1}
-                value={[noOfCol]}
-                // see radix ui slider for reference
-                onValueChange={(newValue) => setNoOfCol(newValue[0])}
-                className="cursor-pointer"
-              />
-            </div>
+            <Label htmlFor="noOfColors">No of colors</Label>
+            <Select
+              defaultValue={noOfCol.toString()}
+              value={noOfCol.toString()}
+              onValueChange={(value) => setNoOfCol(Number(value))}
+            >
+              <SelectTrigger id="noOfColors">
+                <SelectValue placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent className="">
+                {[3, 4, 5, 6, 7, 8].map((num) => {
+                  return (
+                    <SelectItem key={num} value={num.toString()}>
+                      {num}
+                    </SelectItem>
+                  );
+                })}
+              </SelectContent>
+            </Select>
           </div>
           <div className="w-full flex rounded overflow-hidden">
             {palette ? (
