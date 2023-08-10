@@ -21,3 +21,14 @@ export interface PaletteStore {
 export interface PaletteStoreActions extends PaletteStore {
   setPalette: (newPalette: Color[]) => void;
 }
+
+export interface StockImage {
+  url: string;
+}
+
+export interface StockImageIndexStore {
+  currentIndex: number;
+}
+export interface StockImageIndexStoreActions extends StockImageIndexStore {
+  increaseStockImageIndex: () => void;
+}
