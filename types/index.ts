@@ -21,3 +21,7 @@ export interface PaletteStore {
 export interface PaletteStoreActions extends PaletteStore {
   setPalette: (newPalette: Color[]) => void;
 }
+
+export interface StockImage {
+  url: string;
+}

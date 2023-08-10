@@ -10,10 +10,11 @@ import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
 import ExportPaletteDialog from "./ExportPaletteDialog";
 import { Skeleton } from "./ui/skeleton";
 import NoOfColors from "./NoOfColors";
+import { stockImages } from "@/store/stockImages";
+import { getStockImagesURL } from "@/lib/getStockImages";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
-  const palette = usePaletteStore((state) => state.palette);
   const setPalette = usePaletteStore((state) => state.setPalette);
   const [noOfCol, setNoOfCol] = useState(5);
 
@@ -41,34 +42,26 @@ const ImagePaletteExtractor = () => {
   return (
     <div className="flex w-10/12 border border-stone-200 rounded-lg">
       <div className="w-5/12 flex flex-col px-8 py-6 gap-3">
+        {/* File Image Input */}
         <ImageInput />
-        {/* <Button variant="secondary" className="mb-8">
-          Try Stock Image
-        </Button> */}
+
+        {/* Stock Image Input */}
+        <StockImage />
+
         <div className="mt-auto mb-8">
+          {/* Set No Of Colors */}
           <NoOfColors noOfCol={noOfCol} setNoOfCol={setNoOfCol} />
-          <div className="w-full flex rounded overflow-hidden">
-            {palette ? (
-              palette.map((color, index) => {
-                const hex = rgbArrayToHex(color.rgb);
-                return (
-                  <div
-                    key={index}
-                    className="h-10 flex-grow"
-                    style={{ background: `${hex}` }}
-                  ></div>
-                );
-              })
-            ) : (
-              <Skeleton className="w-full h-10" />
-            )}
-          </div>
+
+          {/* Result Color Palette */}
+          <ColorPalette />
         </div>
 
         <div className="flex flex-col gap-3">
           <Button variant="secondary" disabled>
             Test Palette Live
           </Button>
+
+          {/* Export Palette */}
           <ExportPaletteDialog />
         </div>
       </div>
@@ -80,9 +73,52 @@ const ImagePaletteExtractor = () => {
           height={300}
           alt="image"
           priority
+          crossOrigin="anonymous"
           className="w-full aspect-video"
         />
       </div>
+    </div>
+  );
+};
+
+const StockImage = () => {
+  const setImage = useImageStore((state) => state.setImage);
+  const palette = usePaletteStore((state) => state.palette);
+
+  return (
+    <Button
+      variant="secondary"
+      className="mb-8"
+      onClick={() => {
+        getStockImagesURL(5);
+        setImage(stockImages[0].url);
+      }}
+      disabled={!palette}
+    >
+      Try Stock Images
+    </Button>
+  );
+};
+
+const ColorPalette = () => {
+  const palette = usePaletteStore((state) => state.palette);
+
+  return (
+    <div className="w-full flex rounded overflow-hidden">
+      {palette ? (
+        palette.map((color, index) => {
+          const hex = rgbArrayToHex(color.rgb);
+          return (
+            <div
+              key={index}
+              className="h-10 flex-grow"
+              style={{ background: `${hex}` }}
+            ></div>
+          );
+        })
+      ) : (
+        <Skeleton className="w-full h-10" />
+      )}
     </div>
   );
 };
