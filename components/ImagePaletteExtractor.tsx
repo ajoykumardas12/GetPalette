@@ -6,16 +6,20 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ImageInput from "./ImageInput";
 import { usePaletteStore } from "@/store/paletteStore";
 import ColorThief from "colorthief";
-import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
+import {
+  colorThiefDataToPalette,
+  getColNameQueryString,
+  rgbArrayToHex,
+} from "@/lib/utils";
 import ExportPaletteDialog from "./ExportPaletteDialog";
 import { Skeleton } from "./ui/skeleton";
 import NoOfColors from "./NoOfColors";
-import { stockImages } from "@/store/stockImages";
 import { getStockImagesURL } from "@/lib/getStockImages";
 import { useStockImageIndexStore } from "@/store/stockImageIndexStore";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
+  const palette = usePaletteStore((state) => state.palette);
   const setPalette = usePaletteStore((state) => state.setPalette);
   const [noOfCol, setNoOfCol] = useState(5);
 
@@ -39,6 +43,13 @@ const ImagePaletteExtractor = () => {
       });
     }
   }, [getPaletteFromImage, image, setPalette]);
+
+  useEffect(() => {
+    if (palette) {
+      const query = getColNameQueryString(palette);
+      console.log(query);
+    }
+  }, [palette]);
 
   return (
     <div className="flex w-10/12 border border-stone-200 rounded-lg">
