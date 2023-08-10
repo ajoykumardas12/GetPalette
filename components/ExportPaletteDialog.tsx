@@ -24,44 +24,51 @@ const ExportPaletteDialog = () => {
 
   return (
     <>
-      <DialogHeader>
-        <DialogTitle>Export Palette</DialogTitle>
-      </DialogHeader>
-      <div className="grid gap-4 p-4">
-        <Dialog>
-          <DialogTrigger>
-            <div className="w-20 h-20 p-4 flex flex-col items-center justify-center border border-mid/80 focus:bg-mid/20 hover:bg-mid/20 transition-colors rounded">
-              <CSSIcon iconClass="" />
-              CSS
-            </div>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>CSS</DialogHeader>
-            <div className="p-2 border border-mid/40 rounded">
-              <ScrollArea className="h-72">
-                <pre className="text-sm">{paletteCSS}</pre>
-              </ScrollArea>
-            </div>
-            <DialogFooter>
-              <Button
-                onClick={() => {
-                  copy(paletteCSS);
-                  resetCopied();
-                }}
-                className="w-40"
-              >
-                {copied ? (
-                  "Copied!"
-                ) : (
-                  <>
-                    Copy <CopyIcon iconClass="ml-2 w-4 h-4" />
-                  </>
-                )}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </div>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="w-full">Export Palette</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Export Palette</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 p-4">
+            <Dialog>
+              <DialogTrigger>
+                <div className="w-20 h-20 p-4 flex flex-col items-center justify-center border border-mid/80 focus:bg-mid/20 hover:bg-mid/20 transition-colors rounded">
+                  <CSSIcon iconClass="" />
+                  CSS
+                </div>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>CSS</DialogHeader>
+                <div className="p-2 border border-mid/40 rounded">
+                  <ScrollArea className="h-72">
+                    <pre className="text-sm">{paletteCSS}</pre>
+                  </ScrollArea>
+                </div>
+                <DialogFooter>
+                  <Button
+                    onClick={() => {
+                      copy(paletteCSS);
+                      resetCopied();
+                    }}
+                    className="w-40"
+                  >
+                    {copied ? (
+                      "Copied!"
+                    ) : (
+                      <>
+                        Copy <CopyIcon iconClass="ml-2 w-4 h-4" />
+                      </>
+                    )}
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

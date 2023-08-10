@@ -7,7 +7,6 @@ import ImageInput from "./ImageInput";
 import { usePaletteStore } from "@/store/paletteStore";
 import ColorThief from "colorthief";
 import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import ExportPaletteDialog from "./ExportPaletteDialog";
 import { Skeleton } from "./ui/skeleton";
 import NoOfColors from "./NoOfColors";
@@ -70,14 +69,7 @@ const ImagePaletteExtractor = () => {
           <Button variant="secondary" disabled>
             Test Palette Live
           </Button>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className="w-full">Export Palette</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <ExportPaletteDialog />
-            </DialogContent>
-          </Dialog>
+          <ExportPaletteDialog />
         </div>
       </div>
       <div className="w-7/12 p-6 flex items-center justify-center border-l border-l-stone-200">
