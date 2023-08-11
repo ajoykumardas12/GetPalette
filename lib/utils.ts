@@ -61,6 +61,10 @@ export const getColNameQueryString: (palette: Color[]) => string = (
   return queryString;
 };
 
-// export const rgbArrayToColorNames = (rgbArray: number[]) => {
-//   const hexArray =
-// }
+export const kebabize = (str: string) =>
+  str
+    .replace(
+      /[A-Z]+(?![a-z])|[A-Z]/g,
+      ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
+    )
+    .replace(/\s/g, "");

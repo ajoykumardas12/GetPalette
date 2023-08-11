@@ -16,10 +16,14 @@ export interface Color {
 
 export interface PaletteStore {
   palette: null | Color[];
+  paletteName: null | string;
+  colorNames: null | string[];
 }
 
 export interface PaletteStoreActions extends PaletteStore {
   setPalette: (newPalette: Color[]) => void;
+  setPaletteName: (newPaletteName: string) => void;
+  setColorNames: (newColorNames: string[]) => void;
 }
 
 export interface StockImage {

@@ -17,8 +17,11 @@ import CopyIcon from "./icons/CopyIcon";
 
 const ExportPaletteDialog = () => {
   const palette = usePaletteStore((state) => state.palette);
+  const paletteName = usePaletteStore((state) => state.paletteName);
+  const colorNames = usePaletteStore((state) => state.colorNames);
   let paletteCSS = "";
-  if (palette) paletteCSS = generatePaleteCSS(palette);
+  if (palette && paletteName && colorNames)
+    paletteCSS = generatePaleteCSS(palette, paletteName, colorNames);
 
   const [copied, copy, resetCopied] = useCopy();
 
@@ -26,7 +29,9 @@ const ExportPaletteDialog = () => {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="w-full">Export Palette</Button>
+          <Button className="w-full" disabled={!palette}>
+            Export Palette
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
