@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .link {
+    position: relative;
+    padding: 2px 3px;
+  }
+  .link::after {
+    content: "";
+    width: 100%;
+    height: 10%;
+    background: #ad6a3b;
+    border-radius: 0.1rem;
+    opacity: 60%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.3s;
+  }
+  .link:hover::after,
+  .link:focus::after {
+    height: 100%;
+  }
+}
