@@ -1,21 +1,39 @@
 import { Color } from "@/types";
-import { rgbArrayToHex, rgbArrayToString } from "./utils";
+import { kebabize, rgbArrayToHex, rgbArrayToString } from "./utils";
 
-export const generatePaleteCSS = (palette: Color[]) => {
+export const generatePaleteCSS = (
+  palette: Color[],
+  paletteName: string,
+  colorNames: string[]
+) => {
   const hexPalette = palette.map((color) => {
     return rgbArrayToHex(color.rgb);
   });
   const rgbPalette = palette.map((color) => {
     return rgbArrayToString(color.rgb);
   });
-  let paletteCSS = "/* CSS HEX */\n";
+
+  // conver colorNames to kebab case
+  const kebabColorNames = colorNames.map((name) => {
+    return kebabize(name);
+  });
+
+  let paletteCSS = `/* ${paletteName} */\n/* CSS HEX */`;
   paletteCSS =
     paletteCSS +
-    hexPalette.join(";\n") +
-    ";\n\n" +
-    "/* CSS RGB */\n" +
-    rgbPalette.join(";\n") +
-    ";\n";
+    joinPaletteData(hexPalette, kebabColorNames) +
+    "\n\n" +
+    "/* CSS RGB */" +
+    joinPaletteData(rgbPalette, kebabColorNames) +
+    "\n";
 
   return paletteCSS;
+};
+
+const joinPaletteData = (paletteColor: string[], colorNames: string[]) => {
+  let str = "";
+  for (let i = 0; i < paletteColor.length; i++) {
+    str = str + `\n${colorNames[i]}: ${paletteColor[i]};`;
+  }
+  return str;
 };
