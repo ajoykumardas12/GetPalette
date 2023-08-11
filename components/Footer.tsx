@@ -10,13 +10,13 @@ const Footer = () => {
           <HoverCardTrigger asChild>
             <button>Ajoy Kumar Das</button>
           </HoverCardTrigger>
-          <HoverCardContent className="w-max h-max flex justify-center gap-2">
+          <HoverCardContent className="w-max h-max flex justify-center gap-2 bg-[#442f80]">
             <Avatar>
               <AvatarImage src="https://github.com/ajoykumardas12.png" />
               <AvatarFallback>AD</AvatarFallback>
             </Avatar>
             <div className="text-sm text-left">
-              <div>Front-end Developer</div>
+              <div className="text-white">Front-end Developer</div>
               <a
                 href="https://ajoykumardas.vercel.app/"
                 target="_blank"
@@ -34,6 +34,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="underline text-mid"
+          title="GitHub Repository"
         >
           GitHub
         </a>

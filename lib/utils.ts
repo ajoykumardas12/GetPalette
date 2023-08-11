@@ -63,6 +63,7 @@ export const getColNameQueryString: (palette: Color[]) => string = (
 
 export const kebabize = (str: string) =>
   str
+    .replace(/[^\w\s]/g, "")
     .replace(
       /[A-Z]+(?![a-z])|[A-Z]/g,
       ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()

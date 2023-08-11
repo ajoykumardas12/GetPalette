@@ -60,14 +60,8 @@ const ImagePaletteExtractor = () => {
           <ColorPalette />
         </div>
 
-        <div className="flex flex-col gap-3">
-          <Button variant="secondary" disabled>
-            Test Palette Live
-          </Button>
-
-          {/* Export Palette */}
-          <ExportPaletteDialog />
-        </div>
+        {/* Export Palette */}
+        <ExportPaletteDialog />
       </div>
       <div className="w-7/12 p-6 flex items-center justify-center border-l border-l-stone-200">
         <Image
