@@ -6,20 +6,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ImageInput from "./ImageInput";
 import { usePaletteStore } from "@/store/paletteStore";
 import ColorThief from "colorthief";
-import {
-  colorThiefDataToPalette,
-  getColNameQueryString,
-  rgbArrayToHex,
-} from "@/lib/utils";
+import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
 import ExportPaletteDialog from "./ExportPaletteDialog";
 import { Skeleton } from "./ui/skeleton";
 import NoOfColors from "./NoOfColors";
 import { getStockImagesURL } from "@/lib/getStockImages";
 import { useStockImageIndexStore } from "@/store/stockImageIndexStore";
+import { useFetchColorNames } from "@/hooks/useFetchColorNames";
 
 const ImagePaletteExtractor = () => {
   const image = useImageStore((state) => state.image);
-  const palette = usePaletteStore((state) => state.palette);
   const setPalette = usePaletteStore((state) => state.setPalette);
   const [noOfCol, setNoOfCol] = useState(5);
 
@@ -44,12 +40,8 @@ const ImagePaletteExtractor = () => {
     }
   }, [getPaletteFromImage, image, setPalette]);
 
-  useEffect(() => {
-    if (palette) {
-      const query = getColNameQueryString(palette);
-      console.log(query);
-    }
-  }, [palette]);
+  // hook to fetch color names data and set palette names
+  useFetchColorNames();
 
   return (
     <div className="flex w-10/12 border border-stone-200 rounded-lg">
