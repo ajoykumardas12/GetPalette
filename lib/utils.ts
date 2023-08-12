@@ -69,7 +69,7 @@ export const getColNameQueryString: (palette: Color[]) => string = (
 };
 
 export const kebabize = (str: string) => {
-  str
+  return str
     .replace(/[^\w\s]/g, "")
     .replace(
       /[A-Z]+(?![a-z])|[A-Z]/g,
