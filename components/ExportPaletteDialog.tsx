@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +14,8 @@ import { ScrollArea } from "./ui/scroll-area";
 import { Button } from "./ui/button";
 import { useCopy } from "@/hooks/useCopy";
 import CopyIcon from "./icons/CopyIcon";
+import hljs from "highlight.js/lib/core";
+import "highlight.js/styles/github.css";
 
 const ExportPaletteDialog = () => {
   const palette = usePaletteStore((state) => state.palette);
@@ -47,9 +49,9 @@ const ExportPaletteDialog = () => {
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>CSS</DialogHeader>
-                <div className="p-2 border border-mid/40 rounded">
+                <div className="border border-mid/40 rounded overflow-hidden">
                   <ScrollArea className="h-72">
-                    <pre className="text-sm">{paletteCSS}</pre>
+                    <HighlightedCSSCode paletteCSS={paletteCSS} />
                   </ScrollArea>
                 </div>
                 <DialogFooter>
@@ -75,6 +77,17 @@ const ExportPaletteDialog = () => {
         </DialogContent>
       </Dialog>
     </>
+  );
+};
+
+const HighlightedCSSCode = ({ paletteCSS }: { paletteCSS: string }) => {
+  useEffect(() => {
+    hljs.highlightAll();
+  }, []);
+  return (
+    <pre className="text-xs">
+      <code>{paletteCSS}</code>
+    </pre>
   );
 };
 
