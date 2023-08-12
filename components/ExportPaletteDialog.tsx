@@ -15,6 +15,7 @@ import { Button } from "./ui/button";
 import { useCopy } from "@/hooks/useCopy";
 import CopyIcon from "./icons/CopyIcon";
 import hljs from "highlight.js/lib/core";
+import css from "highlight.js/lib/languages/css";
 import "highlight.js/styles/github.css";
 
 const ExportPaletteDialog = () => {
@@ -81,12 +82,13 @@ const ExportPaletteDialog = () => {
 };
 
 const HighlightedCSSCode = ({ paletteCSS }: { paletteCSS: string }) => {
+  hljs.registerLanguage("css", css);
   useEffect(() => {
     hljs.highlightAll();
   }, []);
   return (
-    <pre className="text-xs">
-      <code>{paletteCSS}</code>
+    <pre className="text-sm">
+      <code className="language-css hljs">{paletteCSS}</code>
     </pre>
   );
 };
