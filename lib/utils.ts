@@ -90,3 +90,21 @@ export const generatePaletteLink: (palette: Color[]) => string = (palette) => {
   }/palette/${hexStringPalette.join("-")}`;
   return link;
 };
+
+export const hexToRgb = (hexCode: string) => {
+  const bigint = parseInt(hexCode, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+
+  return [r, g, b];
+};
+
+export const hexArrayToRgbArray: (hexArray: string[]) => Color[] = (
+  hexArray
+) => {
+  const rgbArray = hexArray.map((hex) => {
+    return { rgb: hexToRgb(hex) };
+  });
+  return rgbArray;
+};
