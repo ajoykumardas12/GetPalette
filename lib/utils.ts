@@ -28,6 +28,13 @@ const colComponentToHex = (c: number) => {
   return hex.length == 1 ? "0" + hex : hex;
 };
 
+export const rgbArrayToHexArray = (rgbArray: number[]) => {
+  const hexArray = rgbArray.map((component) => {
+    return colComponentToHex(component);
+  });
+  return hexArray;
+};
+
 export const rgbArrayToHex = (rgbArray: number[]) => {
   return (
     "#" +
@@ -61,7 +68,7 @@ export const getColNameQueryString: (palette: Color[]) => string = (
   return queryString;
 };
 
-export const kebabize = (str: string) =>
+export const kebabize = (str: string) => {
   str
     .replace(/[^\w\s]/g, "")
     .replace(
@@ -69,3 +76,13 @@ export const kebabize = (str: string) =>
       ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
     )
     .replace(/\s/g, "");
+};
+
+export const generatePaletteLink: (palette: Color[]) => string = (palette) => {
+  const hexStringPalette = palette.map((color) => {
+    return rgbArrayToHexArray(color.rgb).join("");
+  });
+
+  let link = `localhost:3000/palette/${hexStringPalette.join("-")}`;
+  return link;
+};
