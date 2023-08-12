@@ -83,6 +83,10 @@ export const generatePaletteLink: (palette: Color[]) => string = (palette) => {
     return rgbArrayToHexArray(color.rgb).join("");
   });
 
-  let link = `localhost:3000/palette/${hexStringPalette.join("-")}`;
+  let link = `${
+    process.env.NEXT_PUBLIC_ENVIRONMENT === "local"
+      ? "localhost:3000"
+      : "getpalette.vercel.app"
+  }/palette/${hexStringPalette.join("-")}`;
   return link;
 };
