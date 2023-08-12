@@ -108,3 +108,13 @@ export const hexArrayToRgbArray: (hexArray: string[]) => Color[] = (
   });
   return rgbArray;
 };
+
+export const checkValidPaletteLink = (hexCodeArray: string[]) => {
+  let flag = true;
+  hexCodeArray.map((hexCode) => {
+    if (hexCode.length != 6) {
+      flag = false;
+    }
+  });
+  return flag;
+};
