@@ -6,6 +6,7 @@ import { usePaletteStore } from "@/store/paletteStore";
 import { rgbArrayToHex } from "@/lib/utils";
 import { useCopy } from "@/hooks/useCopy";
 import { Skeleton } from "./ui/skeleton";
+import CheckCircleIcon from "./icons/CheckCircleIcon";
 
 const CopyPalettes = () => {
   const palette = usePaletteStore((state) => state.palette);
@@ -42,7 +43,11 @@ const Color = ({ rgb }: { rgb: number[] }) => {
       }}
     >
       <div className="flex flex-grow items-center">
-        <CopyIcon iconClass="w-7 h-7 stroke-brand" />
+        {copied ? (
+          <CheckCircleIcon iconClass="w-7 h-7 stroke-brand" />
+        ) : (
+          <CopyIcon iconClass="w-7 h-7 stroke-brand" />
+        )}
       </div>
       <Separator className="mt-auto bg-stone-400/50" />
       <div className="p-1 text-brand">{copied ? "copied!" : hex}</div>
