@@ -17,6 +17,7 @@ import CopyIcon from "./icons/CopyIcon";
 import hljs from "highlight.js/lib/core";
 import css from "highlight.js/lib/languages/css";
 import "highlight.js/styles/github.css";
+import CheckCircleIcon from "./icons/CheckCircleIcon";
 
 const ExportPaletteDialog = () => {
   const palette = usePaletteStore((state) => state.palette);
@@ -64,7 +65,9 @@ const ExportPaletteDialog = () => {
                     className="w-40"
                   >
                     {copied ? (
-                      "Copied!"
+                      <>
+                        Copied! <CheckCircleIcon iconClass="ml-2 w-4 h-4" />
+                      </>
                     ) : (
                       <>
                         Copy <CopyIcon iconClass="ml-2 w-4 h-4" />
