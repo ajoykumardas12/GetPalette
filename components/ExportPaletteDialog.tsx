@@ -20,6 +20,8 @@ import "highlight.js/styles/github.css";
 import CheckCircleIcon from "./icons/CheckCircleIcon";
 import LinkIcon from "./icons/LinkIcon";
 import { generatePaletteLink } from "@/lib/utils";
+import { useToast } from "./ui/use-toast";
+import { ToastAction } from "./ui/toast";
 
 const ExportPaletteDialog = () => {
   const palette = usePaletteStore((state) => state.palette);
@@ -103,12 +105,16 @@ const LinkExport = () => {
   }
 
   const [copied, copy, resetCopied] = useCopy();
+  const { toast } = useToast();
 
   return (
     <button
       onClick={() => {
         copy(link);
         resetCopied();
+        toast({
+          description: "Link copied in your clipboard.",
+        });
       }}
     >
       <div
@@ -116,7 +122,7 @@ const LinkExport = () => {
         title="Copy Link"
       >
         <LinkIcon iconClass="w-8 h-8 stroke-[#41375d]" />
-        Link {link}
+        Link
       </div>
     </button>
   );
