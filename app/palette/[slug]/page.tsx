@@ -2,10 +2,14 @@
 import ExportPaletteDialog from "@/components/ExportPaletteDialog";
 import BadgeQuestionIcon from "@/components/icons/BadgeQuestionIcon";
 import { useFetchColorNames } from "@/hooks/useFetchColorNames";
-import { checkValidPaletteLink, hexArrayToRgbArray } from "@/lib/utils";
+import {
+  checkValidPaletteLink,
+  hexArrayToRgbArray,
+  isHexBgDark,
+} from "@/lib/utils";
 import { usePaletteStore } from "@/store/paletteStore";
 import { useParams } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 export default function PaletteHome() {
   const params = useParams();
   const slug = params.slug as string;
@@ -22,6 +26,8 @@ export default function PaletteHome() {
   }, [setPalette]);
 
   useFetchColorNames();
+
+  const colorNames = usePaletteStore((state) => state.colorNames);
 
   if (!isValidLink) {
     return (
@@ -43,15 +49,13 @@ export default function PaletteHome() {
     return (
       <main className="flex flex-col items-center gap-12 pb-6">
         <div className="h-[26rem] w-full flex">
-          {hexCodeArray.map((hexCode) => {
+          {hexCodeArray.map((hexCode, index) => {
             return (
-              <div
+              <Color
                 key={hexCode}
-                className="w-full h-full grid place-items-center text-black"
-                style={{ background: `#${hexCode}` }}
-              >
-                #{hexCode}
-              </div>
+                hexCode={hexCode}
+                colorName={colorNames ? colorNames[index] : ""}
+              />
             );
           })}
         </div>
@@ -62,3 +66,28 @@ export default function PaletteHome() {
     );
   }
 }
+
+const Color = ({
+  hexCode,
+  colorName,
+}: {
+  hexCode: string;
+  colorName: string;
+}) => {
+  console.log(isHexBgDark("ffffff"));
+
+  return (
+    <div
+      className="w-full h-full flex flex-col gap-6 items-center justify-end pb-10"
+      style={{
+        background: `#${hexCode}`,
+        color: `${isHexBgDark(hexCode) ? "#fff" : "#000"}`,
+      }}
+    >
+      <button className="px-3 py-2 hover:bg-stone-400/10 rounded text-lg font-bold">
+        #{hexCode}
+      </button>
+      <div className="text-xs">{colorName}</div>
+    </div>
+  );
+};

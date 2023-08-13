@@ -118,3 +118,13 @@ export const checkValidPaletteLink = (hexCodeArray: string[]) => {
   });
   return flag;
 };
+
+export const isHexBgDark = (hexBg: string) => {
+  let r = hexBg.substring(0, 2);
+  let g = hexBg.substring(2, 4);
+  let b = hexBg.substring(4, 6);
+
+  const bgDelta =
+    parseInt(r, 16) * 0.299 + parseInt(g, 16) * 0.587 + parseInt(b, 16) * 0.114;
+  return 255 - bgDelta < 105 ? false : true;
+};
