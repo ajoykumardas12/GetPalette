@@ -30,21 +30,7 @@ export default function PaletteHome() {
   const colorNames = usePaletteStore((state) => state.colorNames);
 
   if (!isValidLink) {
-    return (
-      <div className="p-6 pt-16 grid place-items-center">
-        <div className="w-64 h-60 flex border border-brand rounded overflow-hidden group">
-          <div className="w-full h-full bg-darkest"></div>
-          <div className="w-full h-full bg-dark"></div>
-          <div className="w-full h-full bg-brand"></div>
-          <div className="w-full h-full flex items-center justify-end">
-            <BadgeQuestionIcon iconClass="w-10 h-10 rotate-[30deg] mt-12 group-hover:stroke-red-700 group-hover:scale-[1.4] group-hover:rotate-45 transition-transform" />
-          </div>
-          <div className="w-full h-full bg-mid"></div>
-          <div className="w-full h-full bg-light"></div>
-        </div>
-        <div className="mt-6">Oops! The palette seems broken.</div>
-      </div>
-    );
+    return <InvalidPalette />;
   } else {
     return (
       <main className="flex flex-col items-center gap-12 pb-6">
@@ -67,6 +53,24 @@ export default function PaletteHome() {
   }
 }
 
+const InvalidPalette = () => {
+  return (
+    <div className="p-6 pt-16 grid place-items-center">
+      <div className="w-64 h-60 flex border border-brand rounded overflow-hidden group">
+        <div className="w-full h-full bg-darkest"></div>
+        <div className="w-full h-full bg-dark"></div>
+        <div className="w-full h-full bg-brand"></div>
+        <div className="w-full h-full flex items-center justify-end">
+          <BadgeQuestionIcon iconClass="w-10 h-10 rotate-[30deg] mt-12 group-hover:stroke-red-700 group-hover:scale-[1.4] group-hover:rotate-45 transition-transform" />
+        </div>
+        <div className="w-full h-full bg-mid"></div>
+        <div className="w-full h-full bg-light"></div>
+      </div>
+      <div className="mt-6">Oops! The palette seems broken.</div>
+    </div>
+  );
+};
+
 const Color = ({
   hexCode,
   colorName,
@@ -74,8 +78,6 @@ const Color = ({
   hexCode: string;
   colorName: string;
 }) => {
-  console.log(isHexBgDark("ffffff"));
-
   return (
     <div
       className="w-full h-full flex flex-col gap-6 items-center justify-end pb-10"
