@@ -18,16 +18,13 @@ import hljs from "highlight.js/lib/core";
 import css from "highlight.js/lib/languages/css";
 import "highlight.js/styles/github.css";
 import CheckCircleIcon from "./icons/CheckCircleIcon";
+import LinkIcon from "./icons/LinkIcon";
+import { generatePaletteLink } from "@/lib/utils";
+import { useToast } from "./ui/use-toast";
+import { ToastAction } from "./ui/toast";
 
 const ExportPaletteDialog = () => {
   const palette = usePaletteStore((state) => state.palette);
-  const paletteName = usePaletteStore((state) => state.paletteName);
-  const colorNames = usePaletteStore((state) => state.colorNames);
-  let paletteCSS = "";
-  if (palette && paletteName && colorNames)
-    paletteCSS = generatePaleteCSS(palette, paletteName, colorNames);
-
-  const [copied, copy, resetCopied] = useCopy();
 
   return (
     <>
@@ -41,46 +38,93 @@ const ExportPaletteDialog = () => {
           <DialogHeader>
             <DialogTitle>Export Palette</DialogTitle>
           </DialogHeader>
-          <div className="grid gap-4 p-4">
-            <Dialog>
-              <DialogTrigger>
-                <div className="w-20 h-20 p-4 flex flex-col items-center justify-center border border-mid/80 focus:bg-mid/20 hover:bg-mid/20 transition-colors rounded">
-                  <CSSIcon iconClass="" />
-                  CSS
-                </div>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>CSS</DialogHeader>
-                <div className="border border-mid/40 rounded overflow-hidden">
-                  <ScrollArea className="h-72">
-                    <HighlightedCSSCode paletteCSS={paletteCSS} />
-                  </ScrollArea>
-                </div>
-                <DialogFooter>
-                  <Button
-                    onClick={() => {
-                      copy(paletteCSS);
-                      resetCopied();
-                    }}
-                    className="w-40"
-                  >
-                    {copied ? (
-                      <>
-                        Copied! <CheckCircleIcon iconClass="ml-2 w-4 h-4" />
-                      </>
-                    ) : (
-                      <>
-                        Copy <CopyIcon iconClass="ml-2 w-4 h-4" />
-                      </>
-                    )}
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
+          <div className="grid grid-cols-3 gap-4 p-4">
+            <CSSExport />
+            <LinkExport />
           </div>
         </DialogContent>
       </Dialog>
     </>
+  );
+};
+
+const CSSExport = () => {
+  const palette = usePaletteStore((state) => state.palette);
+  const paletteName = usePaletteStore((state) => state.paletteName);
+  const colorNames = usePaletteStore((state) => state.colorNames);
+  let paletteCSS = "";
+  if (palette && paletteName && colorNames)
+    paletteCSS = generatePaleteCSS(palette, paletteName, colorNames);
+
+  const [copied, copy, resetCopied] = useCopy();
+
+  return (
+    <Dialog>
+      <DialogTrigger>
+        <div className="p-4 grid place-items-center gap-2 border border-mid/80 focus:bg-mid/20 hover:bg-mid/20 transition-colors rounded">
+          <CSSIcon iconClass="w-8 h-8" />
+          CSS
+        </div>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>CSS</DialogHeader>
+        <div className="border border-mid/40 rounded overflow-hidden">
+          <ScrollArea className="h-72">
+            <HighlightedCSSCode paletteCSS={paletteCSS} />
+          </ScrollArea>
+        </div>
+        <DialogFooter>
+          <Button
+            onClick={() => {
+              copy(paletteCSS);
+              resetCopied();
+            }}
+            className="w-40"
+          >
+            {copied ? (
+              <>
+                Copied! <CheckCircleIcon iconClass="ml-2 w-4 h-4" />
+              </>
+            ) : (
+              <>
+                Copy <CopyIcon iconClass="ml-2 w-4 h-4" />
+              </>
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+const LinkExport = () => {
+  const palette = usePaletteStore((state) => state.palette);
+  let link = "";
+  if (palette) {
+    link = generatePaletteLink(palette);
+  }
+
+  const [copied, copy, resetCopied] = useCopy();
+  const { toast } = useToast();
+
+  return (
+    <button
+      onClick={() => {
+        copy(link);
+        resetCopied();
+        toast({
+          description: "Link copied in your clipboard.",
+        });
+      }}
+    >
+      <div
+        className="p-4 grid place-items-center gap-2 border border-mid/80 focus:bg-mid/20 hover:bg-mid/20 transition-colors rounded"
+        title="Copy Link"
+      >
+        <LinkIcon iconClass="w-8 h-8 stroke-[#41375d]" />
+        Link
+      </div>
+    </button>
   );
 };
 
