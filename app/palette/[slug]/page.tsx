@@ -1,6 +1,7 @@
 "use client";
 import ExportPaletteDialog from "@/components/ExportPaletteDialog";
 import BadgeQuestionIcon from "@/components/icons/BadgeQuestionIcon";
+import { useCopy } from "@/hooks/useCopy";
 import { useFetchColorNames } from "@/hooks/useFetchColorNames";
 import {
   checkValidPaletteLink,
@@ -78,6 +79,7 @@ const Color = ({
   hexCode: string;
   colorName: string;
 }) => {
+  const [copied, copy, resetCopied] = useCopy();
   return (
     <div
       className="w-full h-full flex flex-col gap-6 items-center justify-end pb-10"
@@ -86,8 +88,15 @@ const Color = ({
         color: `${isHexBgDark(hexCode) ? "#fff" : "#000"}`,
       }}
     >
-      <button className="px-3 py-2 hover:bg-stone-400/10 rounded text-lg font-bold">
-        #{hexCode}
+      <button
+        className="px-3 py-2 hover:bg-stone-400/10 rounded text-lg font-bold"
+        onClick={() => {
+          copy(`#${hexCode}`);
+          resetCopied();
+        }}
+        title="copy"
+      >
+        {copied ? <span className="text-base">Copied!</span> : `#${hexCode}`}
       </button>
       <div className="text-xs">{colorName}</div>
     </div>
