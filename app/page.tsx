@@ -19,7 +19,7 @@ export default function Home() {
           <AddIcon iconClass="w-5 h-5 mr-2" />
           Add palette to community
         </Button>
-        <Link href="browse" className="text-center link">
+        <Link href="/browse" className="text-center link">
           <div className="p-1 text-lg font-medium text-darkest rounded">
             <PaintingPaletteIcon iconClass="w-5 h-5 mr-2" />
             <span className="">Explore community palettes</span>
