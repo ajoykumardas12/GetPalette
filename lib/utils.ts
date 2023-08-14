@@ -109,10 +109,11 @@ export const hexArrayToRgbArray: (hexArray: string[]) => Color[] = (
   return rgbArray;
 };
 
-export const checkValidPaletteLink = (hexCodeArray: string[]) => {
+export const checkValidPaletteLink = (slug: string) => {
+  const hexCodeArray = slug.split("-");
   let flag = true;
   hexCodeArray.map((hexCode) => {
-    if (hexCode.length != 6) {
+    if (!/^([0-9A-F]{3}){1,2}$/i.test(hexCode)) {
       flag = false;
     }
   });

@@ -16,7 +16,7 @@ export default function PaletteHome() {
   const slug = params.slug as string;
 
   const hexCodeArray = slug.split("-");
-  const isValidLink = checkValidPaletteLink(hexCodeArray);
+  const isValidLink = checkValidPaletteLink(slug);
 
   const rgbArray = hexArrayToRgbArray(hexCodeArray);
   const setPalette = usePaletteStore((state) => state.setPalette);
