@@ -6,7 +6,15 @@ const deta = Deta(process.env.DETA_PROJECT_KEY);
 const communityPalettesDB = deta.Base("community-palettes");
 
 export const GET = async (req: Request, res: Response) => {
-  return NextResponse.json({ message: "GOT" });
+  try {
+    const communityPalettes = await communityPalettesDB.fetch();
+    return NextResponse.json({
+      status: 200,
+      data: communityPalettes,
+    });
+  } catch (error) {
+    return NextResponse.json({ status: 400, error: error });
+  }
 };
 
 export const POST = async (req: Request, res: Response) => {
@@ -24,7 +32,7 @@ export const POST = async (req: Request, res: Response) => {
         const palette = await communityPalettesDB.put(data, data.id);
         return NextResponse.json({ status: 200, palette: palette });
       } catch (error) {
-        return NextResponse.json({ error: error });
+        return NextResponse.json({ status: 400, error: error });
       }
     } else {
       return NextResponse.json({ status: 500, error: "Invalid palette data." });
