@@ -1,8 +1,7 @@
+import AddPalette from "@/components/AddPalette";
 import CopyPalettes from "@/components/CopyPalettes";
 import ImagePaletteExtractor from "@/components/ImagePaletteExtractor";
-import AddIcon from "@/components/icons/AddIcon";
 import PaintingPaletteIcon from "@/components/icons/PaintingPaletteIcon";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Home() {
@@ -15,10 +14,7 @@ export default function Home() {
       <ImagePaletteExtractor />
       <CopyPalettes />
       <div className="md:my-10 flex flex-col gap-6">
-        <Button className="">
-          <AddIcon iconClass="w-5 h-5 mr-2" />
-          Add palette to community
-        </Button>
+        <AddPalette />
         <Link href="/browse" className="text-center link">
           <div className="p-1 text-lg font-medium text-darkest rounded">
             <PaintingPaletteIcon iconClass="w-5 h-5 mr-2" />

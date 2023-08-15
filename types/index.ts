@@ -36,3 +36,9 @@ export interface StockImageIndexStore {
 export interface StockImageIndexStoreActions extends StockImageIndexStore {
   increaseStockImageIndex: () => void;
 }
+
+export interface CommunityPalette {
+  id: string;
+  name: string;
+  slug: string;
+}

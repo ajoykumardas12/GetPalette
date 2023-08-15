@@ -1,4 +1,4 @@
-import { Color } from "@/types";
+import { Color, CommunityPalette } from "@/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -8,14 +8,12 @@ export const cn = (...inputs: ClassValue[]) => {
 
 export const colorThiefDataToPalette = (data: number[][]) => {
   const newPalette: Color[] = [];
-  // if (data.length > 0) {
   data.forEach((rgbArray) => {
     const newColor = {
       rgb: rgbArray,
     };
     newPalette.push(newColor);
   });
-  // }
   return newPalette;
 };
 
@@ -128,4 +126,19 @@ export const isHexBgDark = (hexBg: string) => {
   const bgDelta =
     parseInt(r, 16) * 0.299 + parseInt(g, 16) * 0.587 + parseInt(b, 16) * 0.114;
   return 255 - bgDelta < 105 ? false : true;
+};
+
+export const generatePaletteSlug = (palette: Color[]) => {
+  const hexArray = palette.map((color) => {
+    return rgbArrayToHexWOHash(color.rgb);
+  });
+  return hexArray.join("-");
+};
+
+export const isCommunityPalette = (data: any): data is CommunityPalette => {
+  return (
+    typeof data.id === "string" &&
+    typeof data.name === "string" &&
+    typeof data.slug === "string"
+  );
 };
