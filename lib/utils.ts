@@ -142,3 +142,8 @@ export const isCommunityPalette = (data: any): data is CommunityPalette => {
     typeof data.slug === "string"
   );
 };
+
+export const getHexArrFromSlug = (slug: string) => {
+  const hexArray = slug.split("-");
+  return hexArray;
+};

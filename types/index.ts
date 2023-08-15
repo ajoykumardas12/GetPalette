@@ -18,12 +18,14 @@ export interface PaletteStore {
   palette: null | Color[];
   paletteName: null | string;
   colorNames: null | string[];
+  communityPalettes: null | CommunityPalette[];
 }
 
 export interface PaletteStoreActions extends PaletteStore {
   setPalette: (newPalette: Color[]) => void;
   setPaletteName: (newPaletteName: string) => void;
   setColorNames: (newColorNames: string[]) => void;
+  setCommunityPalettes: (data: CommunityPalette[]) => void;
 }
 
 export interface StockImage {

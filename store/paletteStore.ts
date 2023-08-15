@@ -1,10 +1,11 @@
-import { Color, PaletteStoreActions } from "@/types";
+import { Color, CommunityPalette, PaletteStoreActions } from "@/types";
 import { create } from "zustand";
 
 export const usePaletteStore = create<PaletteStoreActions>((set) => ({
   palette: null,
   paletteName: null,
   colorNames: null,
+  communityPalettes: null,
   setPalette: (newPalette: Color[]) => {
     set({
       palette: newPalette,
@@ -17,5 +18,8 @@ export const usePaletteStore = create<PaletteStoreActions>((set) => ({
     set({
       colorNames: newColorNames,
     });
+  },
+  setCommunityPalettes: (data: CommunityPalette[]) => {
+    set({ communityPalettes: data });
   },
 }));
