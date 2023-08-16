@@ -1,6 +1,6 @@
 "use client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getHexArrFromSlug } from "@/lib/utils";
+import { getHexArrFromSlug, isHexBgDark } from "@/lib/utils";
 import { usePaletteStore } from "@/store/paletteStore";
 import { CommunityPalette } from "@/types";
 import Link from "next/link";
@@ -50,14 +50,23 @@ const PaletteComponent = ({ id, name, slug }: CommunityPalette) => {
       <Link
         href={`/palette/${slug}`}
         className="w-full h-64 flex flex-col rounded-md overflow-hidden"
+        title="open palette page"
       >
         {hexArray.map((hex) => {
           return (
             <div
               key={hex}
-              className="flex-grow"
+              className="flex-grow flex items-center px-4 group"
               style={{ background: `#${hex}` }}
-            ></div>
+            >
+              <p
+                className="text-sm font-medium w-max opacity-0 group-hover:opacity-100"
+                style={{ color: `${isHexBgDark(hex) ? "#fff" : "#000"}` }}
+                title="color hex value"
+              >
+                {`#${hex}`}
+              </p>
+            </div>
           );
         })}
       </Link>
