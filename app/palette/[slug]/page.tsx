@@ -98,7 +98,7 @@ const Color = ({
       >
         {copied ? <span className="text-base">Copied!</span> : `#${hexCode}`}
       </button>
-      <div className="text-xs">{colorName}</div>
+      <div className="text-xs min-h-[1rem]">{colorName}</div>
     </div>
   );
 };
