@@ -6,6 +6,7 @@ import { generatePaletteSlug } from "@/lib/utils";
 
 const AddPalette = () => {
   const palette = usePaletteStore((state) => state.palette);
+  const paletteName = usePaletteStore((state) => state.paletteName);
 
   const handleSubmit = () => {
     if (palette) {
@@ -14,7 +15,7 @@ const AddPalette = () => {
         method: "POST",
         body: JSON.stringify({
           id: paletteSlug,
-          name: "",
+          name: paletteName ?? "",
           slug: paletteSlug,
         }),
       })

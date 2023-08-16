@@ -2,6 +2,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { getHexArrFromSlug } from "@/lib/utils";
 import { usePaletteStore } from "@/store/paletteStore";
+import { CommunityPalette } from "@/types";
 import Link from "next/link";
 import { useLayoutEffect } from "react";
 
@@ -24,13 +25,13 @@ export default function Home() {
   return (
     <main className="p-6">
       <h1 className="text-2xl font-semibold ">Community Palettes</h1>
-      <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-16 px-6 my-10">
+      <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-12 px-6 my-10">
         {communityPalettes ? (
           communityPalettes.map((communityPalette) => {
             return (
               <PaletteComponent
                 key={communityPalette.id}
-                slug={communityPalette.slug}
+                {...communityPalette}
               />
             );
           })
@@ -42,21 +43,26 @@ export default function Home() {
   );
 }
 
-const PaletteComponent = ({ slug }: { slug: string }) => {
+const PaletteComponent = ({ id, name, slug }: CommunityPalette) => {
   const hexArray = getHexArrFromSlug(slug);
   return (
     <div className="w-full">
-      <div className="w-full h-64 flex flex-col rounded-md overflow-hidden">
+      <Link
+        href={`/palette/${slug}`}
+        className="w-full h-64 flex flex-col rounded-md overflow-hidden"
+      >
         {hexArray.map((hex) => {
           return (
-            <Link
-              href={`/palette/${slug}`}
+            <div
               key={hex}
               className="flex-grow"
               style={{ background: `#${hex}` }}
-            ></Link>
+            ></div>
           );
         })}
+      </Link>
+      <div className="mt-2">
+        <h2 className="min-h-[1rem] font-medium">{name}</h2>
       </div>
     </div>
   );
