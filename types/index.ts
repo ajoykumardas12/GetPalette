@@ -40,7 +40,7 @@ export interface StockImageIndexStoreActions extends StockImageIndexStore {
 }
 
 export interface CommunityPalette {
-  id: string;
   name: string;
   slug: string;
+  like: number;
 }

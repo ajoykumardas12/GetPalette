@@ -14,9 +14,9 @@ const AddPalette = () => {
       fetch("http://localhost:3000/api/browse", {
         method: "POST",
         body: JSON.stringify({
-          id: paletteSlug,
           name: paletteName ?? "",
           slug: paletteSlug,
+          like: 0,
         }),
       })
         .then((res) => {

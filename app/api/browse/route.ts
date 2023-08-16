@@ -23,13 +23,13 @@ export const POST = async (req: Request, res: Response) => {
   if (body) {
     if (isCommunityPalette(body)) {
       const data = {
-        id: body.id,
         name: body.name,
         slug: body.slug,
+        like: (body.like = 0),
       };
 
       try {
-        const palette = await communityPalettesDB.put(data, data.id);
+        const palette = await communityPalettesDB.insert(data, data.slug);
         return NextResponse.json({ status: 200, palette: palette });
       } catch (error) {
         return NextResponse.json({ status: 400, error: error });
