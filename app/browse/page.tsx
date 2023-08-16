@@ -2,6 +2,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { getHexArrFromSlug } from "@/lib/utils";
 import { usePaletteStore } from "@/store/paletteStore";
+import Link from "next/link";
 import { useLayoutEffect } from "react";
 
 export default function Home() {
@@ -23,7 +24,7 @@ export default function Home() {
   return (
     <main className="p-6">
       <h1 className="text-2xl font-semibold ">Community Palettes</h1>
-      <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-16 px-6 mt-10">
+      <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-16 px-6 my-10">
         {communityPalettes ? (
           communityPalettes.map((communityPalette) => {
             return (
@@ -48,11 +49,12 @@ const PaletteComponent = ({ slug }: { slug: string }) => {
       <div className="w-full h-64 flex flex-col rounded-md overflow-hidden">
         {hexArray.map((hex) => {
           return (
-            <div
+            <Link
+              href={`/palette/${slug}`}
               key={hex}
               className="flex-grow"
               style={{ background: `#${hex}` }}
-            ></div>
+            ></Link>
           );
         })}
       </div>
