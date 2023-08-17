@@ -21,11 +21,15 @@ export default function Home() {
       .catch((error) => console.log(error));
   }, [setCommunityPalettes]);
 
-  let saved = localStorage.getItem("savedPalettes");
-  if (!saved) {
-    saved = JSON.stringify("");
+  let localSaved = [""];
+
+  if (typeof window !== undefined) {
+    let saved = localStorage.getItem("savedPalettes");
+    if (!saved) {
+      saved = JSON.stringify("");
+    }
+    localSaved = JSON.parse(saved);
   }
-  const localSaved = JSON.parse(saved);
 
   const [savedPalettes, setSavedPalettes] = useState<string[]>(localSaved);
 
