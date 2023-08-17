@@ -17,7 +17,8 @@ export default function Home() {
       .then((response) => response.json())
       .then((body) => {
         setCommunityPalettes(body.data.items);
-      });
+      })
+      .catch((error) => console.log(error));
   }, [setCommunityPalettes]);
 
   let saved = localStorage.getItem("savedPalettes");

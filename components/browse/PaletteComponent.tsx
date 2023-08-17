@@ -35,11 +35,11 @@ const PaletteComponent = ({
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        console.log("success", data);
       })
       .catch((err) => {
         setLiked((prev) => !prev);
-        console.log(err);
+        console.log("error", err);
       });
     const newPalettes = [...savedPalettes];
     newPalettes.push(slug);
@@ -61,11 +61,11 @@ const PaletteComponent = ({
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        console.log("success", data);
       })
       .catch((err) => {
         setLiked((prev) => !prev);
-        console.log(err);
+        console.log("error", err);
       });
 
     const newP = [...savedPalettes];
