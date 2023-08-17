@@ -44,3 +44,11 @@ export interface CommunityPalette {
   slug: string;
   like: number;
 }
+
+export interface CommunityPaletteComponentProps {
+  name: string;
+  slug: string;
+  like: number;
+  savedPalettes: string[];
+  setNewSavedPalettes: (newSaved: string[]) => void;
+}

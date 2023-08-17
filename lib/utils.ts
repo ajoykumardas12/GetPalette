@@ -137,9 +137,9 @@ export const generatePaletteSlug = (palette: Color[]) => {
 
 export const isCommunityPalette = (data: any): data is CommunityPalette => {
   return (
-    typeof data.id === "string" &&
     typeof data.name === "string" &&
-    typeof data.slug === "string"
+    typeof data.slug === "string" &&
+    typeof data.like === "number"
   );
 };
 
