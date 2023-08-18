@@ -50,5 +50,5 @@ export interface CommunityPaletteComponentProps {
   slug: string;
   like: number;
   savedPalettes: string[];
-  setNewSavedPalettes: (newSaved: string[]) => void;
+  setSavedPalettes: (newSaved: string[]) => void;
 }

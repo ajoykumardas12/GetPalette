@@ -2,13 +2,15 @@
 import PaletteComponent from "@/components/browse/PaletteComponent";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePaletteStore } from "@/store/paletteStore";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export default function Home() {
   const communityPalettes = usePaletteStore((state) => state.communityPalettes);
   const setCommunityPalettes = usePaletteStore(
     (state) => state.setCommunityPalettes
   );
+
+  // Get community palettes data from api
   useLayoutEffect(() => {
     fetch("http://localhost:3000/api/browse", {
       method: "GET",
@@ -21,24 +23,30 @@ export default function Home() {
       .catch((error) => console.log(error));
   }, [setCommunityPalettes]);
 
-  let localSaved = [""];
+  // localSavedRef stores data from localStorage at first render,
+  // if no data in localStorage, empty array
+  const localSavedRef = useRef([]);
+  useEffect(() => {
+    const saved = localStorage.getItem("savedPalettes");
+    if (saved) localSavedRef.current = JSON.parse(saved);
+  }, []);
 
-  if (typeof window !== undefined) {
-    let saved = localStorage.getItem("savedPalettes");
-    if (!saved) {
-      saved = JSON.stringify("");
-    }
-    localSaved = JSON.parse(saved);
-  }
+  // state storing saved/liked palettes
+  const [savedPalettes, setSavedPalettes] = useState<string[]>([]);
 
-  const [savedPalettes, setSavedPalettes] = useState<string[]>(localSaved);
-
-  const setNewSavedPalettes = (newSavedPalettes: string[]) => {
-    setSavedPalettes(newSavedPalettes);
-  };
+  // tracks if it's first render
+  const firstRender = useRef(true);
 
   useEffect(() => {
-    localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes));
+    // if not first render update localStorage 'savedPalettes',
+    // updating at first render will lead to storing empty array
+    if (!firstRender.current) {
+      localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes));
+    } else {
+      // else(first render) update savedPalette state to localSavedRef value
+      setSavedPalettes(localSavedRef.current);
+      firstRender.current = false;
+    }
   }, [savedPalettes]);
 
   return (
@@ -54,7 +62,7 @@ export default function Home() {
                 slug={communityPalette.slug}
                 like={communityPalette.like}
                 savedPalettes={savedPalettes}
-                setNewSavedPalettes={setNewSavedPalettes}
+                setSavedPalettes={setSavedPalettes}
               />
             );
           })

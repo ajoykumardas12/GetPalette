@@ -9,7 +9,7 @@ const PaletteComponent = ({
   slug,
   like,
   savedPalettes,
-  setNewSavedPalettes,
+  setSavedPalettes,
 }: CommunityPaletteComponentProps) => {
   const [liked, setLiked] = useState(savedPalettes.includes(slug));
   const handleLikeChange = () => {
@@ -45,7 +45,7 @@ const PaletteComponent = ({
     newPalettes.push(slug);
     console.log(newPalettes);
 
-    setNewSavedPalettes(newPalettes);
+    setSavedPalettes(newPalettes);
   };
   const handleDisLiked = async () => {
     await fetch(`http://localhost:3000/api/browse/${slug}`, {
@@ -71,7 +71,7 @@ const PaletteComponent = ({
     const newP = [...savedPalettes];
     const newPalettes = newP.filter((palette) => palette !== slug);
     console.log(newPalettes);
-    setNewSavedPalettes(newPalettes);
+    setSavedPalettes(newPalettes);
   };
   const hexArray = getHexArrFromSlug(slug);
   return (
