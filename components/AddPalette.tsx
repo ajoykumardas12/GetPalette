@@ -11,14 +11,21 @@ const AddPalette = () => {
   const handleSubmit = () => {
     if (palette) {
       const paletteSlug = generatePaletteSlug(palette);
-      fetch("http://localhost:3000/api/browse", {
-        method: "POST",
-        body: JSON.stringify({
-          name: paletteName ?? "",
-          slug: paletteSlug,
-          like: 0,
-        }),
-      })
+      fetch(
+        `${
+          process.env.NEXT_PUBLIC_ENVIRONMENT === "local"
+            ? "http://localhost:3000"
+            : "https://getpalette.vercel.app"
+        }/api/browse`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            name: paletteName ?? "",
+            slug: paletteSlug,
+            like: 0,
+          }),
+        }
+      )
         .then((res) => {
           console.log(res.json());
         })
