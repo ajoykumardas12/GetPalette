@@ -12,10 +12,17 @@ export default function Home() {
 
   // Get community palettes data from api
   useLayoutEffect(() => {
-    fetch("http://localhost:3000/api/browse", {
-      method: "GET",
-      body: null,
-    })
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_ENVIRONMENT === "local"
+          ? "http://localhost:3000"
+          : "https://getpalette.vercel.app"
+      }/api/browse`,
+      {
+        method: "GET",
+        body: null,
+      }
+    )
       .then((response) => response.json())
       .then((body) => {
         setCommunityPalettes(body.data.items);

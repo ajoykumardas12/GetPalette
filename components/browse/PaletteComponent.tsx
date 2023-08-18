@@ -22,15 +22,22 @@ const PaletteComponent = ({
     }
   };
   const handleLiked = async () => {
-    await fetch(`http://localhost:3000/api/browse/${slug}`, {
-      method: "POST",
-      body: JSON.stringify({
-        name: name ?? "",
-        slug: slug,
-        like: like ?? 0,
-        action: "incrementLike",
-      }),
-    })
+    await fetch(
+      `${
+        process.env.NEXT_PUBLIC_ENVIRONMENT === "local"
+          ? "http://localhost:3000"
+          : "https://getpalette.vercel.app"
+      }/api/browse/${slug}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: name ?? "",
+          slug: slug,
+          like: like ?? 0,
+          action: "incrementLike",
+        }),
+      }
+    )
       .then((res) => {
         return res.json();
       })
@@ -48,15 +55,22 @@ const PaletteComponent = ({
     setSavedPalettes(newPalettes);
   };
   const handleDisLiked = async () => {
-    await fetch(`http://localhost:3000/api/browse/${slug}`, {
-      method: "POST",
-      body: JSON.stringify({
-        name: name ?? "",
-        slug: slug,
-        like: like ?? 0,
-        action: "decrementLike",
-      }),
-    })
+    await fetch(
+      `${
+        process.env.NEXT_PUBLIC_ENVIRONMENT === "local"
+          ? "http://localhost:3000"
+          : "https://getpalette.vercel.app"
+      }/api/browse/${slug}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: name ?? "",
+          slug: slug,
+          like: like ?? 0,
+          action: "decrementLike",
+        }),
+      }
+    )
       .then((res) => {
         return res.json();
       })
