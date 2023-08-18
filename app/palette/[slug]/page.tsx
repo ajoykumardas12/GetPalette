@@ -16,7 +16,7 @@ export default function PaletteHome() {
   const slug = params.slug as string;
 
   const hexCodeArray = slug.split("-");
-  const isValidLink = checkValidPaletteLink(hexCodeArray);
+  const isValidLink = checkValidPaletteLink(slug);
 
   const rgbArray = hexArrayToRgbArray(hexCodeArray);
   const setPalette = usePaletteStore((state) => state.setPalette);
@@ -98,7 +98,7 @@ const Color = ({
       >
         {copied ? <span className="text-base">Copied!</span> : `#${hexCode}`}
       </button>
-      <div className="text-xs">{colorName}</div>
+      <div className="text-xs min-h-[1rem]">{colorName}</div>
     </div>
   );
 };

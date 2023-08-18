@@ -1,4 +1,4 @@
-import { Color } from "@/types";
+import { Color, CommunityPalette } from "@/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -8,14 +8,12 @@ export const cn = (...inputs: ClassValue[]) => {
 
 export const colorThiefDataToPalette = (data: number[][]) => {
   const newPalette: Color[] = [];
-  // if (data.length > 0) {
   data.forEach((rgbArray) => {
     const newColor = {
       rgb: rgbArray,
     };
     newPalette.push(newColor);
   });
-  // }
   return newPalette;
 };
 
@@ -83,7 +81,7 @@ export const generatePaletteLink: (palette: Color[]) => string = (palette) => {
     return rgbArrayToHexArray(color.rgb).join("");
   });
 
-  let link = `${
+  const link = `${
     process.env.NEXT_PUBLIC_ENVIRONMENT === "local"
       ? "localhost:3000"
       : "getpalette.vercel.app"
@@ -109,10 +107,11 @@ export const hexArrayToRgbArray: (hexArray: string[]) => Color[] = (
   return rgbArray;
 };
 
-export const checkValidPaletteLink = (hexCodeArray: string[]) => {
+export const checkValidPaletteLink = (slug: string) => {
+  const hexCodeArray = slug.split("-");
   let flag = true;
   hexCodeArray.map((hexCode) => {
-    if (hexCode.length != 6) {
+    if (!/^([0-9A-F]{3}){1,2}$/i.test(hexCode)) {
       flag = false;
     }
   });
@@ -127,4 +126,24 @@ export const isHexBgDark = (hexBg: string) => {
   const bgDelta =
     parseInt(r, 16) * 0.299 + parseInt(g, 16) * 0.587 + parseInt(b, 16) * 0.114;
   return 255 - bgDelta < 105 ? false : true;
+};
+
+export const generatePaletteSlug = (palette: Color[]) => {
+  const hexArray = palette.map((color) => {
+    return rgbArrayToHexWOHash(color.rgb);
+  });
+  return hexArray.join("-");
+};
+
+export const isCommunityPalette = (data: any): data is CommunityPalette => {
+  return (
+    typeof data.name === "string" &&
+    typeof data.slug === "string" &&
+    typeof data.like === "number"
+  );
+};
+
+export const getHexArrFromSlug = (slug: string) => {
+  const hexArray = slug.split("-");
+  return hexArray;
 };
