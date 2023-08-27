@@ -3,10 +3,37 @@ import { usePaletteStore } from "@/store/paletteStore";
 import AddIcon from "./icons/AddIcon";
 import { Button } from "./ui/button";
 import { generatePaletteSlug } from "@/lib/utils";
+import { useToast } from "./ui/use-toast";
+import { AddPaletteResponse } from "@/types";
 
 const AddPalette = () => {
   const palette = usePaletteStore((state) => state.palette);
   const paletteName = usePaletteStore((state) => state.paletteName);
+
+  const { toast } = useToast();
+  const handleResponse = (data: AddPaletteResponse) => {
+    if (data.status === 409) {
+      toast({
+        title: "Already Exists",
+        description: "This palette is already added!",
+      });
+    } else if (data.status === 200) {
+      toast({
+        title: "Yaay🎉",
+        description: "Added to community palettes!",
+      });
+    } else if (data.status === 500 || data.status === 401) {
+      toast({
+        title: "Missing!",
+        description: "Something's missing. Try again.",
+      });
+    } else {
+      toast({
+        title: "Oops!",
+        description: "Something went wrong, try again later.",
+      });
+    }
+  };
 
   const handleSubmit = () => {
     if (palette) {
@@ -27,10 +54,14 @@ const AddPalette = () => {
         }
       )
         .then((res) => {
-          console.log(res.json());
+          return res.json();
         })
+        .then((data) => handleResponse(data))
         .catch((err) => {
-          console.log(err);
+          toast({
+            title: "Oops!",
+            description: "Something went wrong!",
+          });
         });
     }
   };

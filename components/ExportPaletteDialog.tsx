@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,6 @@ import CheckCircleIcon from "./icons/CheckCircleIcon";
 import LinkIcon from "./icons/LinkIcon";
 import { generatePaletteLink } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
-import { ToastAction } from "./ui/toast";
 
 const ExportPaletteDialog = () => {
   const palette = usePaletteStore((state) => state.palette);
