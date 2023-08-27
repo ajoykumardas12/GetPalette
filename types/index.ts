@@ -52,3 +52,9 @@ export interface CommunityPaletteComponentProps {
   savedPalettes: string[];
   setSavedPalettes: (newSaved: string[]) => void;
 }
+
+export interface AddPaletteResponse {
+  status: number;
+  palette?: CommunityPalette;
+  error: string;
+}
