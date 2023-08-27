@@ -10,7 +10,7 @@ import {
 } from "@/lib/utils";
 import { usePaletteStore } from "@/store/paletteStore";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 export default function PaletteHome() {
   const params = useParams();
   const slug = params.slug as string;
@@ -20,6 +20,12 @@ export default function PaletteHome() {
 
   const rgbArray = hexArrayToRgbArray(hexCodeArray);
   const setPalette = usePaletteStore((state) => state.setPalette);
+  const setColorNames = usePaletteStore((state) => state.setColorNames);
+
+  useLayoutEffect(() => {
+    // Reset color names to empty to prevent name change when new names are fetched
+    setColorNames([]);
+  }, [setColorNames]);
 
   useEffect(() => {
     setPalette(rgbArray);
