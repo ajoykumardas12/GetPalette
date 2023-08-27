@@ -67,13 +67,13 @@ const AddPalette = () => {
   };
   return (
     <Button
-      className=""
+      className="group"
       onClick={(e) => {
         e.preventDefault();
         handleSubmit();
       }}
     >
-      <AddIcon iconClass="w-5 h-5 mr-2" />
+      <AddIcon iconClass="w-5 h-5 mr-2 group-hover:rotate-90 group-focus:rotate-90 transition-transform duration-300" />
       Add palette to community
     </Button>
   );
