@@ -99,7 +99,7 @@ const PaletteComponent = ({
           return (
             <div
               key={hex}
-              className="flex-grow flex items-center px-4 group"
+              className="flex-grow flex items-center px-4 group basis-6 hover:basis-12 transition-all"
               style={{ background: `#${hex}` }}
             >
               <p
