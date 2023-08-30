@@ -33,11 +33,11 @@ const ExportPaletteDialog = () => {
             Export Palette
           </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="max-w-xs xs:max-w-sm sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>Export Palette</DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-3 gap-4 p-4">
+          <div className="grid grid-cols-3 gap-4 p-2 xs:p-4">
             <CSSExport />
             <LinkExport />
           </div>
@@ -61,14 +61,14 @@ const CSSExport = () => {
     <Dialog>
       <DialogTrigger>
         <div className="p-4 grid place-items-center gap-2 border border-mid/80 focus:bg-mid/20 hover:bg-mid/20 transition-colors rounded">
-          <CSSIcon iconClass="w-8 h-8" />
+          <CSSIcon iconClass="w-6 h-6 xs:w-8 xs:h-8" />
           CSS
         </div>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-xs xs:max-w-sm sm:max-w-lg">
         <DialogHeader>CSS</DialogHeader>
         <div className="border border-mid/40 rounded overflow-hidden">
-          <ScrollArea className="h-72">
+          <ScrollArea className="h-64 xs:h-72">
             <HighlightedCSSCode paletteCSS={paletteCSS} />
           </ScrollArea>
         </div>
@@ -121,7 +121,7 @@ const LinkExport = () => {
         className="p-4 grid place-items-center gap-2 border border-mid/80 focus:bg-mid/20 hover:bg-mid/20 transition-colors rounded"
         title="Copy Link"
       >
-        <LinkIcon iconClass="w-8 h-8 stroke-[#41375d]" />
+        <LinkIcon iconClass="w-6 h-6 xs:w-8 xs:h-8 stroke-[#41375d]" />
         Link
       </div>
     </button>
@@ -134,7 +134,7 @@ const HighlightedCSSCode = ({ paletteCSS }: { paletteCSS: string }) => {
     hljs.highlightAll();
   }, []);
   return (
-    <pre className="text-sm">
+    <pre className="text-xs xs:text-sm">
       <code className="language-css hljs">{paletteCSS}</code>
     </pre>
   );
