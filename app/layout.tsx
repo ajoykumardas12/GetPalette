@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "GetPalette",
     images: [
       {
-        url: "https://getpalette.vercel.app/_next/image?url=%2Fimages%2Fnew-world.png&w=640&q=75",
+        url: "https://raw.githubusercontent.com/ajoykumardas12/get-palette/main/public/images/get-palette.png",
       },
     ],
   },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@ajoykdas",
     images:
-      "https://getpalette.vercel.app/_next/image?url=%2Fimages%2Fnew-world.png&w=640&q=75",
+      "https://raw.githubusercontent.com/ajoykumardas12/get-palette/main/public/images/get-palette.png",
   },
 };
 
