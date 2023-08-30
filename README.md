@@ -40,9 +40,9 @@ To run this project locally,
 
 5. Run dev server
 
-```sh
-   npm run dev
-```
+   ```sh
+      npm run dev
+   ```
 
 ## Acknowledgments
 
