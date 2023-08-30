@@ -20,16 +20,19 @@ const AddPalette = () => {
     } else if (data.status === 200) {
       toast({
         title: "Yaay🎉",
+        variant: "success",
         description: "Added to community palettes!",
       });
     } else if (data.status === 500 || data.status === 401) {
       toast({
         title: "Missing!",
+        variant: "error",
         description: "Something's missing. Try again.",
       });
     } else {
       toast({
         title: "Oops!",
+        variant: "error",
         description: "Something went wrong, try again later.",
       });
     }
@@ -60,6 +63,7 @@ const AddPalette = () => {
         .catch((err) => {
           toast({
             title: "Oops!",
+            variant: "error",
             description: "Something went wrong!",
           });
         });

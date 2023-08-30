@@ -112,6 +112,7 @@ const LinkExport = () => {
         copy(link);
         resetCopied();
         toast({
+          variant: "success",
           description: "Link copied in your clipboard.",
         });
       }}
