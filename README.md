@@ -38,6 +38,12 @@ To run this project locally,
    DETA_PROJECT_KEY="YOUR_PROJECT_KEY"
    ```
 
+5. Run dev server
+
+```sh
+   npm run dev
+```
+
 ## Acknowledgments
 
 - [Initial Image](https://www.freepik.com/free-photo/beautiful-natural-environment-digital-painting_15174562.htm)
