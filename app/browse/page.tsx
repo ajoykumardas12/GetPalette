@@ -58,8 +58,8 @@ export default function Home() {
 
   return (
     <main className="p-6">
-      <h1 className="text-2xl font-semibold ">Community Palettes</h1>
-      <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-12 px-6 my-10">
+      <h1 className="text-xl sm:text-2xl font-semibold ">Community Palettes</h1>
+      <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-10 xs:gap-12 px-6 mt-8 xs:mt-10 mb-10">
         {communityPalettes ? (
           communityPalettes.map((communityPalette) => {
             return (
@@ -86,7 +86,12 @@ const LoadingSkeleton = () => {
   return (
     <>
       {arr.map((num) => {
-        return <Skeleton key={num} className="w-full h-64"></Skeleton>;
+        return (
+          <Skeleton
+            key={num}
+            className="w-full h-52 xs:h-60 sm:h-64"
+          ></Skeleton>
+        );
       })}
     </>
   );

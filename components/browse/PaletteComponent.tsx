@@ -92,7 +92,7 @@ const PaletteComponent = ({
     <div className="w-full">
       <Link
         href={`/palette/${slug}`}
-        className="w-full h-64 flex flex-col rounded-md overflow-hidden"
+        className="w-full h-52 xs:h-60 sm:h-64 flex flex-col rounded-md overflow-hidden"
         title="open palette page"
       >
         {hexArray.map((hex) => {
