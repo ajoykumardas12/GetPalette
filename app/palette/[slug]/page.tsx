@@ -41,7 +41,7 @@ export default function PaletteHome() {
   } else {
     return (
       <main className="flex flex-col items-center gap-12 pb-6">
-        <div className="h-[26rem] w-full flex">
+        <div className="sm:h-[26rem] w-full flex flex-col sm:flex-row">
           {hexCodeArray.map((hexCode, index) => {
             return (
               <Color
@@ -88,7 +88,7 @@ const Color = ({
   const [copied, copy, resetCopied] = useCopy();
   return (
     <div
-      className="w-full h-full flex flex-col gap-6 items-center justify-end pb-10"
+      className="w-full h-full flex flex-col gap-3 sm:gap-6 items-center justify-end pt-2 pb-6 sm:pb-10"
       style={{
         background: `#${hexCode}`,
         color: `${isHexBgDark(hexCode) ? "#fff" : "#000"}`,
@@ -104,7 +104,7 @@ const Color = ({
       >
         {copied ? <span className="text-base">Copied!</span> : `#${hexCode}`}
       </button>
-      <div className="text-xs min-h-[1rem]">{colorName}</div>
+      <div className="text-xs text-center min-h-[1rem]">{colorName}</div>
     </div>
   );
 };
