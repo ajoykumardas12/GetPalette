@@ -43,6 +43,7 @@ export interface CommunityPalette {
   name: string;
   slug: string;
   like: number;
+  createdAt: number;
 }
 
 export interface CommunityPaletteComponentProps {

@@ -31,6 +31,7 @@ export const POST = async (req: Request, res: Response) => {
         name: body.name,
         slug: body.slug,
         like: (body.like = 0),
+        createdAt: body.createdAt,
       };
 
       try {

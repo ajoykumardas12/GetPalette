@@ -139,7 +139,8 @@ export const isCommunityPalette = (data: any): data is CommunityPalette => {
   return (
     typeof data.name === "string" &&
     typeof data.slug === "string" &&
-    typeof data.like === "number"
+    typeof data.like === "number" &&
+    typeof data.createdAt === "number"
   );
 };
 
