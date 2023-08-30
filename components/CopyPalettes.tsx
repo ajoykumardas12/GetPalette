@@ -19,9 +19,11 @@ const CopyPalettes = () => {
         })
       ) : (
         <>
-          <Skeleton className="w-32 h-32 rounded-lg" />
-          <Skeleton className="w-32 h-32 rounded-lg" />
-          <Skeleton className="w-32 h-32 rounded-lg" />
+          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
+          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
+          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
+          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
+          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
         </>
       )}
     </div>

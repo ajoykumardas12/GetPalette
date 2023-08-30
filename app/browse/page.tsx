@@ -86,7 +86,12 @@ const LoadingSkeleton = () => {
   return (
     <>
       {arr.map((num) => {
-        return <Skeleton key={num} className="w-full h-64"></Skeleton>;
+        return (
+          <Skeleton
+            key={num}
+            className="w-full h-52 xs:h-60 sm:h-64"
+          ></Skeleton>
+        );
       })}
     </>
   );
