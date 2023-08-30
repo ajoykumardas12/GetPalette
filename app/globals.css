@@ -24,4 +24,20 @@
   .link:focus::after {
     height: 100%;
   }
+  .error-gradient {
+    background: linear-gradient(
+      170deg,
+      #160f29 25%,
+      #41375d 25.5%,
+      #41375d 42.5%,
+      #ad6a3b 43%,
+      #ad6a3b 60%,
+      #65a6a3 60.5%,
+      #65a6a3 75%,
+      #badbda 75.5%,
+      #badbda 100%
+    );
+    background-clip: text;
+    color: transparent;
+  }
 }
