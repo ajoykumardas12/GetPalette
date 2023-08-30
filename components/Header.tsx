@@ -15,7 +15,7 @@ const Header = () => {
           />
           <div className="ml-2 text-lg font-semibold">GetPalette</div>
         </Link>
-        <div className="ml-auto">
+        <div className="ml-auto font-medium">
           <Link href="/browse">Explore</Link>
         </div>
       </header>

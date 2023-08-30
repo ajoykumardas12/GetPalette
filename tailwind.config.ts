@@ -38,6 +38,9 @@ const config: Config = {
         mid: "#65A6A3",
         light: "#DFEAEA",
       },
+      screens: {
+        xs: "460px",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
