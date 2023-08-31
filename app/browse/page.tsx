@@ -1,7 +1,9 @@
 "use client";
 import PaletteComponent from "@/components/browse/PaletteComponent";
+import SortPalettes from "@/components/browse/SortPalettes";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePaletteStore } from "@/store/paletteStore";
+import { useSortStore } from "@/store/sortStore";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -9,6 +11,9 @@ export default function Home() {
   const setCommunityPalettes = usePaletteStore(
     (state) => state.setCommunityPalettes
   );
+
+  const sortBy = useSortStore((state) => state.sortBy);
+  const order = useSortStore((state) => state.order);
 
   // Get community palettes data from api
   useLayoutEffect(() => {
@@ -56,12 +61,37 @@ export default function Home() {
     }
   }, [savedPalettes]);
 
+  const [sortedCommunityPalettes, setSortedCommunityPalettes] =
+    useState(communityPalettes);
+
+  // Sort data
+  useEffect(() => {
+    if (communityPalettes) {
+      if (order === "descending") {
+        const sortedData = [...communityPalettes].sort(
+          (a, b) => b[sortBy] - a[sortBy]
+        );
+        setSortedCommunityPalettes(sortedData);
+      } else if (order === "ascending") {
+        const sortedData = [...communityPalettes].sort(
+          (a, b) => a[sortBy] - b[sortBy]
+        );
+        setSortedCommunityPalettes(sortedData);
+      }
+    }
+  }, [communityPalettes, order, sortBy]);
+
   return (
-    <main className="p-6">
-      <h1 className="text-xl sm:text-2xl font-semibold ">Community Palettes</h1>
+    <main className="px-6 py-4">
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl sm:text-2xl font-semibold ">
+          Community Palettes
+        </h1>
+        <SortPalettes />
+      </div>
       <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-10 xs:gap-12 px-6 mt-8 xs:mt-10 mb-10">
-        {communityPalettes ? (
-          communityPalettes.map((communityPalette) => {
+        {sortedCommunityPalettes ? (
+          sortedCommunityPalettes.map((communityPalette) => {
             return (
               <PaletteComponent
                 key={communityPalette.slug}

@@ -53,6 +53,7 @@ const AddPalette = () => {
             name: paletteName ?? "",
             slug: paletteSlug,
             like: 0,
+            createdAt: Date.now(),
           }),
         }
       )

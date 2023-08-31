@@ -16,6 +16,7 @@ export const POST = async (req: Request, res: Response) => {
           name: body.name,
           slug: body.slug,
           like: body.like,
+          createdAt: body.createdAt,
         };
 
         const updatedData = {
@@ -41,6 +42,7 @@ export const POST = async (req: Request, res: Response) => {
           name: body.name,
           slug: body.slug,
           like: body.like,
+          createdAt: body.createdAt,
         };
 
         const updatedData = {

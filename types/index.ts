@@ -39,10 +39,24 @@ export interface StockImageIndexStoreActions extends StockImageIndexStore {
   increaseStockImageIndex: () => void;
 }
 
+export interface SortBy {
+  sortBy: "createdAt" | "like";
+}
+
+export interface Order {
+  order: "ascending" | "descending";
+}
+
+export interface SortStoreActions extends SortBy, Order {
+  setSortBy: (newSortBy: "createdAt" | "like") => void;
+  setOrder: (newOrder: "ascending" | "descending") => void;
+}
+
 export interface CommunityPalette {
   name: string;
   slug: string;
   like: number;
+  createdAt: number;
 }
 
 export interface CommunityPaletteComponentProps {
