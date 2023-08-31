@@ -1,4 +1,4 @@
-import { ImageStoreActions, ImageStoreState } from "@/types";
+import { ImageStoreActions } from "@/types";
 import { create } from "zustand";
 
 export const useImageStore = create<ImageStoreActions>((set) => ({

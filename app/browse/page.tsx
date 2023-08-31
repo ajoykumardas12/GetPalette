@@ -1,17 +1,9 @@
 "use client";
 import PaletteComponent from "@/components/browse/PaletteComponent";
-import SortIcon from "@/components/icons/SortIcon";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Separator } from "@/components/ui/separator";
+import SortPalettes from "@/components/browse/SortPalettes";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePaletteStore } from "@/store/paletteStore";
+import { useSortStore } from "@/store/sortStore";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -20,8 +12,8 @@ export default function Home() {
     (state) => state.setCommunityPalettes
   );
 
-  const [sortBy, setSortBy] = useState<"createdAt" | "like">("createdAt");
-  const [order, setOrder] = useState<"ascending" | "descending">("descending");
+  const sortBy = useSortStore((state) => state.sortBy);
+  const order = useSortStore((state) => state.order);
 
   // Get community palettes data from api
   useLayoutEffect(() => {
@@ -80,7 +72,6 @@ export default function Home() {
           (a, b) => b[sortBy] - a[sortBy]
         );
         setSortedCommunityPalettes(sortedData);
-        console.log("sorted", sortBy, order);
       } else if (order === "ascending") {
         const sortedData = [...communityPalettes].sort(
           (a, b) => a[sortBy] - b[sortBy]
@@ -96,63 +87,7 @@ export default function Home() {
         <h1 className="text-xl sm:text-2xl font-semibold ">
           Community Palettes
         </h1>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button size="sm" variant="outline" className="sm:text-base px-2">
-              Sort <SortIcon iconClass="w-3 h-4 sm:w-4 sm:h-5 ml-1" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="p-0 bg-stone-300 max-w-[16rem] sm:max-w-md border border-stone-500">
-            <h4 className="font-semibold leading-none px-3 py-2">
-              Sort community palettes
-            </h4>
-            <Separator className="bg-stone-500" />
-            <div className="p-4 grid gap-4">
-              <div className="flex gap-4">
-                <p className="font-semibold">Sort by:</p>
-                <RadioGroup
-                  className="my-1"
-                  value={sortBy}
-                  onValueChange={(value) => {
-                    if (value === "createdAt") {
-                      setSortBy("createdAt");
-                    } else if (value == "like") setSortBy("like");
-                  }}
-                >
-                  <div className="flex items-center gap-1">
-                    <RadioGroupItem value="createdAt" id="date" />
-                    <Label htmlFor="date">Date</Label>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <RadioGroupItem value="like" id="like" />
-                    <Label htmlFor="like">Like</Label>
-                  </div>
-                </RadioGroup>
-              </div>
-              <div className="flex gap-4">
-                <p className="font-semibold">Order:</p>
-                <RadioGroup
-                  className="my-1"
-                  value={order}
-                  onValueChange={(value) => {
-                    if (value === "ascending") {
-                      setOrder("ascending");
-                    } else if (value == "descending") setOrder("descending");
-                  }}
-                >
-                  <div className="flex items-center gap-1">
-                    <RadioGroupItem value="ascending" id="ascending" />
-                    <Label htmlFor="ascending">Ascending</Label>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <RadioGroupItem value="descending" id="descending" />
-                    <Label htmlFor="descending">Descending</Label>
-                  </div>
-                </RadioGroup>
-              </div>
-            </div>
-          </PopoverContent>
-        </Popover>
+        <SortPalettes />
       </div>
       <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-10 xs:gap-12 px-6 mt-8 xs:mt-10 mb-10">
         {sortedCommunityPalettes ? (
