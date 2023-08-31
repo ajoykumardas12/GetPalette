@@ -20,8 +20,8 @@ export default function Home() {
     (state) => state.setCommunityPalettes
   );
 
-  const [sortBy, setSortBy] = useState("Date");
-  const [order, setOrder] = useState("Ascending");
+  const [sortBy, setSortBy] = useState<"createdAt" | "like">("createdAt");
+  const [order, setOrder] = useState<"ascending" | "descending">("descending");
 
   // Get community palettes data from api
   useLayoutEffect(() => {
@@ -69,6 +69,27 @@ export default function Home() {
     }
   }, [savedPalettes]);
 
+  const [sortedCommunityPalettes, setSortedCommunityPalettes] =
+    useState(communityPalettes);
+
+  // Sort data
+  useEffect(() => {
+    if (communityPalettes) {
+      if (order === "descending") {
+        const sortedData = [...communityPalettes].sort(
+          (a, b) => b[sortBy] - a[sortBy]
+        );
+        setSortedCommunityPalettes(sortedData);
+        console.log("sorted", sortBy, order);
+      } else if (order === "ascending") {
+        const sortedData = [...communityPalettes].sort(
+          (a, b) => a[sortBy] - b[sortBy]
+        );
+        setSortedCommunityPalettes(sortedData);
+      }
+    }
+  }, [communityPalettes, order, sortBy]);
+
   return (
     <main className="px-6 py-4">
       <div className="flex items-center justify-between">
@@ -92,15 +113,19 @@ export default function Home() {
                 <RadioGroup
                   className="my-1"
                   value={sortBy}
-                  onValueChange={(value) => setSortBy(value)}
+                  onValueChange={(value) => {
+                    if (value === "createdAt") {
+                      setSortBy("createdAt");
+                    } else if (value == "like") setSortBy("like");
+                  }}
                 >
                   <div className="flex items-center gap-1">
-                    <RadioGroupItem value="Date" id="date" />
+                    <RadioGroupItem value="createdAt" id="date" />
                     <Label htmlFor="date">Date</Label>
                   </div>
                   <div className="flex items-center gap-1">
-                    <RadioGroupItem value="Likes" id="likes" />
-                    <Label htmlFor="likes">Likes</Label>
+                    <RadioGroupItem value="like" id="like" />
+                    <Label htmlFor="like">Like</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -109,14 +134,18 @@ export default function Home() {
                 <RadioGroup
                   className="my-1"
                   value={order}
-                  onValueChange={(value) => setOrder(value)}
+                  onValueChange={(value) => {
+                    if (value === "ascending") {
+                      setOrder("ascending");
+                    } else if (value == "descending") setOrder("descending");
+                  }}
                 >
                   <div className="flex items-center gap-1">
-                    <RadioGroupItem value="Ascending" id="ascending" />
+                    <RadioGroupItem value="ascending" id="ascending" />
                     <Label htmlFor="ascending">Ascending</Label>
                   </div>
                   <div className="flex items-center gap-1">
-                    <RadioGroupItem value="Descending" id="descending" />
+                    <RadioGroupItem value="descending" id="descending" />
                     <Label htmlFor="descending">Descending</Label>
                   </div>
                 </RadioGroup>
@@ -126,8 +155,8 @@ export default function Home() {
         </Popover>
       </div>
       <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-10 xs:gap-12 px-6 mt-8 xs:mt-10 mb-10">
-        {communityPalettes ? (
-          communityPalettes.map((communityPalette) => {
+        {sortedCommunityPalettes ? (
+          sortedCommunityPalettes.map((communityPalette) => {
             return (
               <PaletteComponent
                 key={communityPalette.slug}
