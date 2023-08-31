@@ -7,7 +7,7 @@ import ImageInput from "./ImageInput";
 import { usePaletteStore } from "@/store/paletteStore";
 import ColorThief from "colorthief";
 import { colorThiefDataToPalette, rgbArrayToHex } from "@/lib/utils";
-import ExportPaletteDialog from "./ExportPaletteDialog";
+import ExportPaletteDialog from "./palette-exports/ExportPaletteDialog";
 import { Skeleton } from "./ui/skeleton";
 import NoOfColors from "./NoOfColors";
 import { getStockImagesURL } from "@/lib/getStockImages";

@@ -1,5 +1,5 @@
 "use client";
-import ExportPaletteDialog from "@/components/ExportPaletteDialog";
+import ExportPaletteDialog from "@/components/palette-exports/ExportPaletteDialog";
 import BadgeQuestionIcon from "@/components/icons/BadgeQuestionIcon";
 import { useCopy } from "@/hooks/useCopy";
 import { useFetchColorNames } from "@/hooks/useFetchColorNames";
