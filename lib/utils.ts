@@ -84,7 +84,7 @@ export const generatePaletteLink: (palette: Color[]) => string = (palette) => {
   const link = `${
     process.env.NEXT_PUBLIC_ENVIRONMENT === "local"
       ? "localhost:3000"
-      : "getpalette.vercel.app"
+      : "Getpalette.vercel.app"
   }/palette/${hexStringPalette.join("-")}`;
   return link;
 };
