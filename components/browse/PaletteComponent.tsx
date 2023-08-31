@@ -42,15 +42,14 @@ const PaletteComponent = ({
         return res.json();
       })
       .then((data) => {
-        console.log("success", data);
+        // console.log("success", data);
       })
       .catch((err) => {
         setLiked((prev) => !prev);
-        console.log("error", err);
+        // console.log("error", err);
       });
     const newPalettes = [...savedPalettes];
     newPalettes.push(slug);
-    console.log(newPalettes);
 
     setSavedPalettes(newPalettes);
   };
@@ -75,16 +74,15 @@ const PaletteComponent = ({
         return res.json();
       })
       .then((data) => {
-        console.log("success", data);
+        // console.log("success", data);
       })
       .catch((err) => {
         setLiked((prev) => !prev);
-        console.log("error", err);
+        // console.log("error", err);
       });
 
     const newP = [...savedPalettes];
     const newPalettes = newP.filter((palette) => palette !== slug);
-    console.log(newPalettes);
     setSavedPalettes(newPalettes);
   };
   const hexArray = getHexArrFromSlug(slug);
