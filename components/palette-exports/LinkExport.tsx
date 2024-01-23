@@ -11,6 +11,7 @@ const LinkExport = () => {
     link = generatePaletteLink(palette);
   }
 
+  // eslint-disable-next-line no-unused-vars
   const [copied, copy, resetCopied] = useCopy();
   const { toast } = useToast();
 

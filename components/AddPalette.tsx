@@ -61,7 +61,7 @@ const AddPalette = () => {
           return res.json();
         })
         .then((data) => handleResponse(data))
-        .catch((err) => {
+        .catch(() => {
           toast({
             title: "Oops!",
             variant: "error",

@@ -5,7 +5,7 @@ import { isCommunityPalette } from "@/lib/utils";
 const deta = Deta(process.env.DETA_PROJECT_KEY);
 const communityPalettesDB = deta.Base("community-palettes");
 
-export const GET = async (req: Request, res: Response) => {
+export const GET = async () => {
   // Returns all communityPalettes
   try {
     const communityPalettes = await communityPalettesDB.fetch();
@@ -19,7 +19,7 @@ export const GET = async (req: Request, res: Response) => {
   }
 };
 
-export const POST = async (req: Request, res: Response) => {
+export const POST = async (req: Request) => {
   // Validates palette data and adds to db unless already exists
   const body = await req.json();
 

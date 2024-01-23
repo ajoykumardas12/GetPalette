@@ -12,6 +12,7 @@ const NoOfColors = ({
   setNoOfCol,
 }: {
   noOfCol: number;
+  // eslint-disable-next-line no-unused-vars
   setNoOfCol: (no: number) => void;
 }) => {
   return (

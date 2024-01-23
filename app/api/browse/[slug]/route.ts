@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 const deta = Deta(process.env.DETA_PROJECT_KEY);
 const communityPalettesDB = deta.Base("community-palettes");
 
-export const POST = async (req: Request, res: Response) => {
+export const POST = async (req: Request) => {
   const body = await req.json();
   if (body) {
     const action = body.action;

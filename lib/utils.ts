@@ -42,6 +42,7 @@ export const rgbArrayToHex = (rgbArray: number[]) => {
   );
 };
 
+// eslint-disable-next-line no-unused-vars
 export const rgbArrayToHexWOHash: (rgbArray: number[]) => string = (
   rgbArray
 ) => {
@@ -52,6 +53,7 @@ export const rgbArrayToHexWOHash: (rgbArray: number[]) => string = (
   );
 };
 
+// eslint-disable-next-line no-unused-vars
 export const getColNameQueryString: (palette: Color[]) => string = (
   palette
 ) => {
@@ -76,6 +78,7 @@ export const kebabize = (str: string) => {
     .replace(/\s/g, "");
 };
 
+// eslint-disable-next-line no-unused-vars
 export const generatePaletteLink: (palette: Color[]) => string = (palette) => {
   const hexStringPalette = palette.map((color) => {
     return rgbArrayToHexArray(color.rgb).join("");
@@ -98,6 +101,7 @@ export const hexToRgb = (hexCode: string) => {
   return [r, g, b];
 };
 
+// eslint-disable-next-line no-unused-vars
 export const hexArrayToRgbArray: (hexArray: string[]) => Color[] = (
   hexArray
 ) => {

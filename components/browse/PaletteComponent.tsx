@@ -41,10 +41,10 @@ const PaletteComponent = ({
       .then((res) => {
         return res.json();
       })
-      .then((data) => {
+      .then(() => {
         // console.log("success", data);
       })
-      .catch((err) => {
+      .catch(() => {
         setLiked((prev) => !prev);
         // console.log("error", err);
       });
@@ -73,10 +73,10 @@ const PaletteComponent = ({
       .then((res) => {
         return res.json();
       })
-      .then((data) => {
+      .then(() => {
         // console.log("success", data);
       })
-      .catch((err) => {
+      .catch(() => {
         setLiked((prev) => !prev);
         // console.log("error", err);
       });

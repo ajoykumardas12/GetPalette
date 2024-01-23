@@ -1,5 +1,6 @@
 import { stockImages } from "@/store/stockImages";
 
+// eslint-disable-next-line no-unused-vars
 export const getStockImagesURL: (stockImgIndex: number) => string = (
   stockImgIndex: number
 ) => {
