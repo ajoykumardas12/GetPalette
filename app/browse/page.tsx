@@ -84,12 +84,12 @@ export default function Home() {
   return (
     <main className="px-6 py-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl sm:text-2xl font-semibold ">
+        <h1 className="text-xl font-semibold sm:text-2xl ">
           Community Palettes
         </h1>
         <SortPalettes />
       </div>
-      <section className="grid grid-cols-1 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3 gap-10 xs:gap-12 px-6 mt-8 xs:mt-10 mb-10">
+      <section className="mb-10 mt-8 grid grid-cols-1 gap-10 px-6 xs:mt-10 xs:gap-12 min-[540px]:grid-cols-2 min-[840px]:grid-cols-3">
         {sortedCommunityPalettes ? (
           sortedCommunityPalettes.map((communityPalette) => {
             return (
@@ -119,7 +119,7 @@ const LoadingSkeleton = () => {
         return (
           <Skeleton
             key={num}
-            className="w-full h-52 xs:h-60 sm:h-64"
+            className="h-52 w-full xs:h-60 sm:h-64"
           ></Skeleton>
         );
       })}

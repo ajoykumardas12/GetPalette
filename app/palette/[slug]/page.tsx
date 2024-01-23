@@ -41,7 +41,7 @@ export default function PaletteHome() {
   } else {
     return (
       <main className="flex flex-col items-center gap-12 pb-6">
-        <div className="sm:h-[26rem] w-full flex flex-col sm:flex-row">
+        <div className="flex w-full flex-col sm:h-[26rem] sm:flex-row">
           {hexCodeArray.map((hexCode, index) => {
             return (
               <Color
@@ -52,7 +52,7 @@ export default function PaletteHome() {
             );
           })}
         </div>
-        <div className="w-40 mt-auto">
+        <div className="mt-auto w-40">
           <ExportPaletteDialog />
         </div>
       </main>
@@ -62,16 +62,16 @@ export default function PaletteHome() {
 
 const InvalidPalette = () => {
   return (
-    <div className="p-6 pt-16 grid place-items-center">
-      <div className="w-64 h-60 flex border border-brand rounded overflow-hidden group">
-        <div className="w-full h-full bg-darkest"></div>
-        <div className="w-full h-full bg-dark"></div>
-        <div className="w-full h-full bg-brand"></div>
-        <div className="w-full h-full flex items-center justify-end">
+    <div className="grid place-items-center p-6 pt-16">
+      <div className="group flex h-60 w-64 overflow-hidden rounded border border-brand">
+        <div className="h-full w-full bg-darkest"></div>
+        <div className="h-full w-full bg-dark"></div>
+        <div className="h-full w-full bg-brand"></div>
+        <div className="flex h-full w-full items-center justify-end">
           <BadgeQuestionIcon iconClass="w-10 h-10 rotate-[30deg] mt-12 group-hover:stroke-red-700 group-hover:scale-[1.4] group-hover:rotate-45 transition-transform" />
         </div>
-        <div className="w-full h-full bg-mid"></div>
-        <div className="w-full h-full bg-light"></div>
+        <div className="h-full w-full bg-mid"></div>
+        <div className="h-full w-full bg-light"></div>
       </div>
       <div className="mt-6">Oops! The palette seems broken.</div>
     </div>
@@ -88,14 +88,14 @@ const Color = ({
   const [copied, copy, resetCopied] = useCopy();
   return (
     <div
-      className="w-full h-full flex flex-col gap-3 sm:gap-6 items-center justify-end pt-2 pb-6 sm:pb-10"
+      className="flex h-full w-full flex-col items-center justify-end gap-3 pb-6 pt-2 sm:gap-6 sm:pb-10"
       style={{
         background: `#${hexCode}`,
         color: `${isHexBgDark(hexCode) ? "#fff" : "#000"}`,
       }}
     >
       <button
-        className="px-3 py-2 hover:bg-stone-400/10 rounded text-lg font-bold"
+        className="rounded px-3 py-2 text-lg font-bold hover:bg-stone-400/10"
         onClick={() => {
           copy(`#${hexCode}`);
           resetCopied();
@@ -104,7 +104,7 @@ const Color = ({
       >
         {copied ? <span className="text-base">Copied!</span> : `#${hexCode}`}
       </button>
-      <div className="text-xs text-center min-h-[1rem]">{colorName}</div>
+      <div className="min-h-[1rem] text-center text-xs">{colorName}</div>
     </div>
   );
 };

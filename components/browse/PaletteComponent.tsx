@@ -90,18 +90,18 @@ const PaletteComponent = ({
     <div className="w-full">
       <Link
         href={`/palette/${slug}`}
-        className="w-full h-52 xs:h-60 sm:h-64 flex flex-col rounded-md overflow-hidden"
+        className="flex h-52 w-full flex-col overflow-hidden rounded-md xs:h-60 sm:h-64"
         title="open palette page"
       >
         {hexArray.map((hex) => {
           return (
             <div
               key={hex}
-              className="flex-grow flex items-center px-4 group basis-6 hover:basis-12 transition-all"
+              className="group flex flex-grow basis-6 items-center px-4 transition-all hover:basis-12"
               style={{ background: `#${hex}` }}
             >
               <p
-                className="text-sm font-medium w-max opacity-0 group-hover:opacity-100"
+                className="w-max text-sm font-medium opacity-0 group-hover:opacity-100"
                 style={{ color: `${isHexBgDark(hex) ? "#fff" : "#000"}` }}
                 title="color hex value"
               >
@@ -111,10 +111,10 @@ const PaletteComponent = ({
           );
         })}
       </Link>
-      <div className="mt-2 px-2 flex items-center justify-between">
+      <div className="mt-2 flex items-center justify-between px-2">
         <h2 className="min-h-[1rem] font-medium">{name}</h2>
         <button
-          className="text-sm text-stone-800 px-2 py-1 rounded hover:bg-stone-200"
+          className="rounded px-2 py-1 text-sm text-stone-800 hover:bg-stone-200"
           title="Like"
           onClick={handleLikeChange}
         >

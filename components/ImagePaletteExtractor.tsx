@@ -44,15 +44,15 @@ const ImagePaletteExtractor = () => {
   useFetchColorNames();
 
   return (
-    <div className="flex flex-col-reverse md:flex-row w-full sm:w-11/12 lg:w-10/12 max-w-7xl border border-stone-200 rounded-lg">
-      <div className="md:w-5/12 flex flex-col px-8 py-4 md:py-6 gap-3">
+    <div className="flex w-full max-w-7xl flex-col-reverse rounded-lg border border-stone-200 sm:w-11/12 md:flex-row lg:w-10/12">
+      <div className="flex flex-col gap-3 px-8 py-4 md:w-5/12 md:py-6">
         {/* File Image Input */}
         <ImageInput />
 
         {/* Stock Image Input */}
         <StockImage />
 
-        <div className="mt-auto mb-6 md:mb-8">
+        <div className="mb-6 mt-auto md:mb-8">
           {/* Set No Of Colors */}
           <NoOfColors noOfCol={noOfCol} setNoOfCol={setNoOfCol} />
 
@@ -63,7 +63,7 @@ const ImagePaletteExtractor = () => {
         {/* Export Palette */}
         <ExportPaletteDialog />
       </div>
-      <div className="md:w-7/12 p-4 md:p-6 flex items-center justify-center border-l border-l-stone-200">
+      <div className="flex items-center justify-center border-l border-l-stone-200 p-4 md:w-7/12 md:p-6">
         <Image
           ref={imgRef}
           src={image ? image : "/images/new-world.png"}
@@ -72,7 +72,7 @@ const ImagePaletteExtractor = () => {
           alt="image"
           priority
           crossOrigin="anonymous"
-          className="w-full aspect-video"
+          className="aspect-video w-full"
         />
       </div>
     </div>
@@ -106,7 +106,7 @@ const ColorPalette = () => {
   const palette = usePaletteStore((state) => state.palette);
 
   return (
-    <div className="w-full flex rounded overflow-hidden">
+    <div className="flex w-full overflow-hidden rounded">
       {palette ? (
         palette.map((color, index) => {
           const hex = rgbArrayToHex(color.rgb);
@@ -119,7 +119,7 @@ const ColorPalette = () => {
           );
         })
       ) : (
-        <Skeleton className="w-full h-10" />
+        <Skeleton className="h-10 w-full" />
       )}
     </div>
   );

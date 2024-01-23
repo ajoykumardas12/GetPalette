@@ -18,16 +18,16 @@ const SortPalettes = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button size="sm" variant="outline" className="sm:text-base px-2">
+        <Button size="sm" variant="outline" className="px-2 sm:text-base">
           Sort <SortIcon iconClass="w-3 h-4 sm:w-4 sm:h-5 ml-1" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 bg-stone-200 max-w-[16rem] sm:max-w-md border border-stone-400">
-        <h4 className="font-semibold leading-none px-3 py-2">
+      <PopoverContent className="max-w-[16rem] border border-stone-400 bg-stone-200 p-0 sm:max-w-md">
+        <h4 className="px-3 py-2 font-semibold leading-none">
           Sort community palettes
         </h4>
         <Separator className="bg-stone-300" />
-        <div className="p-4 grid gap-4">
+        <div className="grid gap-4 p-4">
           <div className="flex gap-4">
             <p className="font-semibold">Sort by:</p>
             <RadioGroup

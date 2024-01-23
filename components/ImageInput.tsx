@@ -22,7 +22,7 @@ const ImageInput = () => {
       />
       <label
         htmlFor="image"
-        className="w-full h-full flex items-center justify-center gap-2 cursor-pointer"
+        className="flex h-full w-full cursor-pointer items-center justify-center gap-2"
       >
         <ImageIcon iconClass="w-5 h-5" /> Upload Image
       </label>

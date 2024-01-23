@@ -12,18 +12,18 @@ const CopyPalettes = () => {
   const palette = usePaletteStore((state) => state.palette);
 
   return (
-    <div className="w-full flex justify-center gap-4 sm:gap-6 flex-wrap md:my-4">
+    <div className="flex w-full flex-wrap justify-center gap-4 sm:gap-6 md:my-4">
       {palette ? (
         palette.map((colorFromPalette, index) => {
           return <Color key={index} rgb={colorFromPalette.rgb} />;
         })
       ) : (
         <>
-          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
-          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
-          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
-          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
-          <Skeleton className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] rounded-lg" />
+          <Skeleton className="h-20 w-20 rounded-lg xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem]" />
+          <Skeleton className="h-20 w-20 rounded-lg xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem]" />
+          <Skeleton className="h-20 w-20 rounded-lg xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem]" />
+          <Skeleton className="h-20 w-20 rounded-lg xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem]" />
+          <Skeleton className="h-20 w-20 rounded-lg xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem]" />
         </>
       )}
     </div>
@@ -37,7 +37,7 @@ const Color = ({ rgb }: { rgb: number[] }) => {
 
   return (
     <Button
-      className="h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] flex flex-col items-center text-xs md:text-sm cursor-pointer rounded-lg hover:-translate-y-1 focus:-translate-y-1 transition-transform"
+      className="flex h-20 w-20 cursor-pointer flex-col items-center rounded-lg text-xs transition-transform hover:-translate-y-1 focus:-translate-y-1 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem] md:text-sm"
       style={{ background: `${hex}` }}
       onClick={() => {
         copy(hex);

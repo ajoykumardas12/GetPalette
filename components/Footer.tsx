@@ -6,25 +6,25 @@ const Footer = () => {
   return (
     <>
       <Separator className="mt-auto" />
-      <footer className="p-8 text-center text-sm bg-light">
+      <footer className="bg-light p-8 text-center text-sm">
         <div>
           Built by{" "}
           <HoverCard>
             <HoverCardTrigger asChild>
               <button>Ajoy Kumar Das</button>
             </HoverCardTrigger>
-            <HoverCardContent className="w-max h-max flex justify-center gap-2 bg-[#442f80]">
+            <HoverCardContent className="flex h-max w-max justify-center gap-2 bg-[#442f80]">
               <Avatar>
                 <AvatarImage src="https://github.com/ajoykumardas12.png" />
                 <AvatarFallback>AD</AvatarFallback>
               </Avatar>
-              <div className="text-sm text-left">
+              <div className="text-left text-sm">
                 <div className="text-white">Front-end Developer</div>
                 <a
                   href="https://ajoykumardas.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline text-mid"
+                  className="text-mid underline"
                 >
                   Portfolio
                 </a>
@@ -36,7 +36,7 @@ const Footer = () => {
             href="https://github.com/ajoykumardas12/get-palette"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline text-mid"
+            className="text-mid underline"
             title="GitHub Repository"
           >
             GitHub
